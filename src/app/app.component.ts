@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { HomepageComponent } from './homepage/homepage.component';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'App';
+  // change this into false
+  isSignedIn: boolean = true;
 }
