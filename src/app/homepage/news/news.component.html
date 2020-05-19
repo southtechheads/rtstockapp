@@ -1,0 +1,16 @@
+<div class="v-spacing">
+  <carousel>
+    <slide *ngFor="let news of newslist; index as i">
+      <div class="text-center py-5 bg-light text-dark">
+        <h2> {{ news.title }}</h2>
+        <hr>
+        <br><br>
+        <div class="lead">
+          <h5> {{ news.headline }} </h5>
+          <p> {{ news.description}} </p>
+          <br>
+        </div>
+      </div>
+    </slide>
+  </carousel>
+</div>

@@ -1,0 +1,15 @@
+<!-- please revise stockitem.ts for actual values -->
+<div class="justify-content-center">
+  <p class="px-5">{{ stockName}}
+    <span class="h-spacing">
+      <span *ngIf="negative" class="material-icons" style="font-size:15px;color:red;font-weight:bolder">
+        arrow_downward
+      </span>
+      <span *ngIf="!negative" class="material-icons" style="font-size:15px;color:green;font-weight:bolder">
+        arrow_upward
+      </span>
+    </span>
+    <span class="h-spacing item">{{ stockValue | currency }}</span>
+    </p>
+  <hr>
+</div>
