@@ -17,7 +17,7 @@ export class StockService {
 
   constructor(private http: HttpClient) {}
 
-  getSymbols(term: string): observable<Hero[]> {
+  getSymbols(term: string): Observable<Hero[]> {
     //  const params = new HttpParams({fromString: 'name=term'});
 
     return this.httpClient.request('GET', `${baseURL}${symbolURL}`, {
