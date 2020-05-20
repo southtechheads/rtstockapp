@@ -45,7 +45,7 @@ export class AuthService {
     if (firebaseAuthSignIn) {
       console.log(firebaseAuthSignIn.user.uid);
       const userId = firebaseAuthSignIn.user.uid;
-        //sa
+      //sa
       await localStorage.setItem('stockapp:uid', JSON.stringify(userId));
 
       return true;
@@ -88,5 +88,6 @@ export class AuthService {
 
   logout() {
     this.loggedIn = false;
+    this.auth.signOut();
   }
 }
