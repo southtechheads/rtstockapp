@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AngularFireModule } from '@angular/fire';
+import {HttpClientModule} from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -19,6 +20,8 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import { AuthService } from './auth.service';
 import { AuthGuardService } from './auth.guard.service';
 import { environment } from '../environments/environment';
+import {StockService} from './stock.service';
+import { HttpClient } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -38,8 +41,9 @@ import { environment } from '../environments/environment';
     AngularFireModule.initializeApp(environment.firebase),
     AppRoutingModule,
     CarouselModule.forRoot(),
+    HttpClientModule
   ],
-  providers: [AuthService, AuthGuardService],
+  providers: [AuthService, AuthGuardService, StockService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
