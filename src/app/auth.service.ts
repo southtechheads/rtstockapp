@@ -8,13 +8,6 @@ import { auth } from 'firebase/app';
   providedIn: 'root',
 })
 export class AuthService {
-  private baseURL: string = 'https://finnhub.io/api/v1/';
-  private symbolURL: string = '/stock/symbol?exchange=US';
-  private companyProfileURL: string = '/stock/profile2?symbol=';
-  private quoteURL: string = '/quote?symbol=';
-  private firebaseURL: string;
-  private symbol: string;
-
   constructor(private auth: AngularFireAuth) {}
   // private isUserLoggedIn;
   // private username;
