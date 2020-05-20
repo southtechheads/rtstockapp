@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import * as _ from 'lodash';
 
 @Injectable({
   providedIn: 'root',
@@ -15,6 +16,7 @@ export class StockService {
   profile: any;
   symbols:any;
   topMovers:any[] = ['MSFT', 'AAPL', 'AMZN', 'GOOGL','FB','INTL']
+  quote:any;
   // companynewsURL '/company-news?symbol=AAPL&from=2020-04-30&to=2020-05-01'
   // earnings '/calendar/earnings?from=2010-01-01&to=2020-03-15&symbol=AAPL'
 
@@ -48,7 +50,18 @@ export class StockService {
    }
    return newprofile
   }
+   
+  getTopMovers(){
+   let newTopMovers =  _.forEach(this.topMovers, function(symbol){
+      this.quote = this.http.get(`${this.stockURL}${this.quoteURL}${symbol}`);
+      console.log(this.quote);
+      return this.quote;
+    })
+    console.log(newTopMovers);
+    return newTopMovers;
   
+
+  }
 
 
   
