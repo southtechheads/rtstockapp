@@ -1,0 +1,21 @@
+form {
+  padding-left: 30%;
+  padding-right: 30%;
+}
+
+#signup {
+  margin-left: 10%;
+}
+
+h1 {
+  text-align: center;
+}
+
+.button-standard {
+  background-color: rgb(52, 58, 64);
+}
+
+.v-spacing {
+  margin-top: 10%;
+  margin-bottom: 10%;
+}

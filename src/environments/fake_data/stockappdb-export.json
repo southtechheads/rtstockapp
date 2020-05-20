@@ -1,0 +1,31 @@
+{
+  "stocks" : {
+    "fpStocks" : [ "LVMH", "MSFT", "AAPL", "GOOGL", "FB", "INTC", "AMZN", "ORCL", "CVX", "JNJ", "UAA" ]
+  },
+  "user" : {
+    "Ashley" : {
+      "balance" : 1000000,
+      "myStocks" : [ "RCL", "MRO", "UAA", "KR" ],
+      "watchList" : [ "NIKE", "HD", "CRM" ]
+    },
+    "Brian" : {
+      "balance" : 10000,
+      "myStocks" : [ "GE", "F", "HST", "GSI" ],
+      "watchList" : [ "VZ", "CSCO" ]
+    },
+    "Darrien" : {
+      "balance" : 60000,
+      "myStocks" : [ "SBUX", "FIT", "BTC", "ADDYY" ],
+      "watchList" : [ "MRO", "XOM" ]
+    },
+    "Jessica" : {
+      "balance" : 200000,
+      "myStocks" : [ "SNAP", "AAPL", "TSLA", "NFLX" ],
+      "watchList" : [ "CSCO" ]
+    },
+    "Rachel" : {
+      "balance" : 25000,
+      "myStocks" : [ "KMB", "CRI", "BA", "DIS" ]
+    }
+  }
+}
