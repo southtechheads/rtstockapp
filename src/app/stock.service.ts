@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observables } from 'rxjs';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -17,17 +17,10 @@ export class StockService {
 
   constructor(private http: HttpClient) {}
 
-  getSymbols(term: string): Observable<Hero[]> {
-    //  const params = new HttpParams({fromString: 'name=term'});
 
-    return this.httpClient.request('GET', `${baseURL}${symbolURL}`, {
-      responseType: 'json',
-      params,
-    });
-  }
-
+// intial SignIn calls 
   getSymbols(): Observable<Symbol[]> {
-    return this.http.get<Symbol>(`${stockURL}${symbolURL}`);
+    return this.http.get<Symbol[]>(`${this.stockURL}${this.symbolURL}`);
   }
 }
 
