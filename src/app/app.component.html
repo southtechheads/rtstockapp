@@ -1,5 +1,6 @@
 <div class="container">
-
+  <app-header></app-header>
+  <router-outlet></router-outlet>
 
   <!-- sign in and sign up page -->
 
@@ -7,7 +8,8 @@
 
 
   <!-- home page content etc -->
-  <div *ngIf="isSignedIn">
+
+  <!-- <div *ngIf="isSignedIn">
     <app-homepage></app-homepage>
-  </div>
+  </div> -->
 </div>
