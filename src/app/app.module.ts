@@ -11,6 +11,12 @@ import { CompanyComponent } from './homepage/browse/company/company.component';
 
 import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { NewsComponent } from './homepage/news/news.component';
+import { HeaderComponent } from './header/header.component';
+import { LoginFormComponent } from './login-form/login-form.component';
+import { SignUpComponent } from './sign-up/sign-up.component';
+
+import { AuthService } from './auth.service';
+import { AuthGuardService } from './auth.guard.service';
 
 
 @NgModule({
@@ -22,13 +28,16 @@ import { NewsComponent } from './homepage/news/news.component';
     HomepageComponent,
     CompanyComponent,
     NewsComponent,
+    HeaderComponent,
+    LoginFormComponent,
+    SignUpComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     CarouselModule.forRoot()
   ],
-  providers: [],
+  providers: [AuthService, AuthGuardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

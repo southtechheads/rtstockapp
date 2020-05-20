@@ -1,0 +1,14 @@
+<h1>Sign Up</h1>
+<hr>
+<form (submit)="signUpUser($event)">
+    <div class="form-group">
+        <label for="exampleInputEmail1">Email address</label>
+        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1">Password</label>
+        <input type="password" class="form-control" id="exampleInputPassword1">
+    </div>
+    <button type="submit" class="btn btn-primary">Sign Up</button>
+    <a routerLink="/"><button type="button" class="btn btn-secondary" id="goBack">Go back</button></a>
+</form>
