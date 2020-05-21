@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { StockchartComponent } from './stockchart/stockchart.component';
+
 
 @Component({
   selector: 'app-stockpage',
@@ -12,7 +14,6 @@ export class StockpageComponent implements OnInit {
   stockPrice = Math.random() * 100 + Math.random();
   stockDescription = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. '
   stockCost = this.stockPrice;
-
 
 
   constructor() { }
