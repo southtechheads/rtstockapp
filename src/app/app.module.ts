@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AngularFireModule } from '@angular/fire';
+import {HttpClientModule} from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -19,10 +20,15 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import { AuthService } from './auth.service';
 import { AuthGuardService } from './auth.guard.service';
 import { environment } from '../environments/environment';
+<<<<<<< HEAD
 import { StockpageComponent } from './stockpage/stockpage.component';
 import { StockpurchaseComponent } from './stockpage/stockpurchase/stockpurchase.component';
 import { StockchartComponent } from './stockpage/stockchart/stockchart.component';
 import { StockupdatesComponent } from './stockpage/stockupdates/stockupdates.component';
+=======
+import {StockService} from './stock.service';
+import { HttpClient } from '@angular/common/http';
+>>>>>>> dev
 
 @NgModule({
   declarations: [
@@ -46,8 +52,9 @@ import { StockupdatesComponent } from './stockpage/stockupdates/stockupdates.com
     AngularFireModule.initializeApp(environment.firebase),
     AppRoutingModule,
     CarouselModule.forRoot(),
+    HttpClientModule
   ],
-  providers: [AuthService, AuthGuardService],
+  providers: [AuthService, AuthGuardService, StockService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

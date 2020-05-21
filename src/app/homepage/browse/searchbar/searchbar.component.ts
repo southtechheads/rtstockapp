@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {StockService} from '../../../stock.service';
 
 @Component({
   selector: 'app-searchbar',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SearchbarComponent implements OnInit {
 
-  constructor() { }
+  constructor(private stockService: StockService) { }
   
   ngOnInit(): void {
   }
+
+
+
 
 }
