@@ -19,6 +19,10 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import { AuthService } from './auth.service';
 import { AuthGuardService } from './auth.guard.service';
 import { environment } from '../environments/environment';
+import { StockpageComponent } from './stockpage/stockpage.component';
+import { StockpurchaseComponent } from './stockpage/stockpurchase/stockpurchase.component';
+import { StockchartComponent } from './stockpage/stockchart/stockchart.component';
+import { StockupdatesComponent } from './stockpage/stockupdates/stockupdates.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +36,10 @@ import { environment } from '../environments/environment';
     HeaderComponent,
     LoginFormComponent,
     SignUpComponent,
+    StockpageComponent,
+    StockpurchaseComponent,
+    StockchartComponent,
+    StockupdatesComponent,
   ],
   imports: [
     BrowserModule,
