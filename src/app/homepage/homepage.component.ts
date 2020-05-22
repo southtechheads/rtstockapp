@@ -4,6 +4,9 @@ import { SearchbarComponent } from './browse/searchbar/searchbar.component';
 import { CompanyComponent } from './browse/company/company.component';
 import { NewsComponent } from './news/news.component';
 import {StockService} from '../stock.service';
+import {Observable} from 'rxjs';
+import {Quote} from '../models/quote';
+
 
 @Component({
   selector: 'app-homepage',
@@ -12,16 +15,23 @@ import {StockService} from '../stock.service';
 })
 export class HomepageComponent implements OnInit {
 
-  topMovers:any; 
-
-  getTopMovers():void {
-    this.topMovers = this.stockService.getTopMovers();
-  }
+  topMovers:any []= []; 
+  
+  quote = new Quote;
   constructor(private stockService: StockService) { }
 
+  
   ngOnInit() {
-    console.log("loaded")
-    this.getTopMovers();
+    console.log("loaded");
+    let onGetQuote= this.stockService.getQuote(this.quote).subscribe((quoteArr: any ) => {
+    this.quote = quoteArr;
+    console.log(quoteArr)
+    }, (error) => {
+      console.log(error)
+    })
+  
+   return 
+    
   }
 
 }

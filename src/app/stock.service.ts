@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import * as _ from 'lodash';
+import {Quote} from './models/quote';
 
 @Injectable({
   providedIn: 'root',
@@ -11,12 +12,14 @@ export class StockService {
   symbolURL: string = '/stock/symbol?exchange=US';
   companyProfileURL: string = '/stock/profile2?symbol=';
   quoteURL: string = '/quote?symbol=';
-  firebaseURL: string;
-  symbol: string;
+  firebaseURL: string = 'https://stockappdb.firebaseio.com/';
+  symbol: string = 'MSFT';
   profile: any;
   symbols:any;
-  topMovers:any[] = ['MSFT', 'AAPL', 'AMZN', 'GOOGL','FB','INTL']
-  quote:any;
+  topMovers:any[] = ['MSFT', 'AAPL', 'AMZN', 'GOOGL','FB','INTL'];
+ 
+  token: string = '&token=br2p5tvrh5rbm8ou56tg';
+  
   // companynewsURL '/company-news?symbol=AAPL&from=2020-04-30&to=2020-05-01'
   // earnings '/calendar/earnings?from=2010-01-01&to=2020-03-15&symbol=AAPL'
 
@@ -25,7 +28,7 @@ export class StockService {
 
 // intial SignIn calls 
   getSymbols(): Observable<Symbol[]> {
-    this.symbols = this.http.get<Symbol[]>(`${this.stockURL}${this.symbolURL}`)
+    this.symbols = this.http.get<Symbol[]>(`${this.stockURL}${this.symbolURL}${this.token}`)
     if (this.symbols){
       console.log(this.symbols)
     } 
@@ -33,7 +36,7 @@ export class StockService {
   }
 
   getProfile(input:string){
-   this.profile = this.http.get(`${this.stockURL}${this.companyProfileURL}${input}`);
+   this.profile = this.http.get(`${this.stockURL}${this.companyProfileURL}${input}${this.token}`);
    type Profile = {
      country: string 
      name: string 
@@ -51,26 +54,30 @@ export class StockService {
    return newprofile
   }
    
-  getTopMovers(){
-   let newTopMovers =  _.forEach(this.topMovers, function(symbol){
-      this.quote = this.http.get(`${this.stockURL}${this.quoteURL}${symbol}`);
-      console.log(this.quote);
-      return this.quote;
-    })
-    console.log(newTopMovers);
-    return newTopMovers;
-  
-
-  }
+ 
 
 
+  public getQuote(quote:Quote){
+    let quoteurl= `${this.stockURL}${this.quoteURL}${this.symbol}${this.token}`;
+    return  this.http.get<Quote[]>(quoteurl);
+    }
   
 }
    
 
 
 
+   // getTopMovers(){
+  //  let newTopMovers =  _.forEach(this.topMovers, function(symbol){
+  //     this.quote = this.http.get(`${this.stockURL}${this.quoteURL}${symbol}`);
+  //     console.log(this.quote);
+  //     return this.quote;
+  //   })
+  //   console.log(newTopMovers);
+  //   return newTopMovers;
   
+
+  // }
 
 
 
