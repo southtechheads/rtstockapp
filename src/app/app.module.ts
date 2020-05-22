@@ -35,6 +35,7 @@ import { HttpClient } from '@angular/common/http';
     HeaderComponent,
     LoginFormComponent,
     SignUpComponent,
+    
   ],
   imports: [
     BrowserModule,
