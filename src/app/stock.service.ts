@@ -6,9 +6,11 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class StockService {
+
   stockURL: string = 'https://finnhub.io/api/v1/';
   symbolURL: string = '/stock/symbol?exchange=US';
   companyProfileURL: string = '/stock/profile2?symbol=';
+  tokenURL:string = 'token=br2p5tvrh5rbm8ou56tg'
   quoteURL: string = '/quote?symbol=';
   firebaseURL: string;
   symbol: string;
@@ -21,33 +23,40 @@ export class StockService {
   constructor(private http: HttpClient) {}
 
 
+  // test test test remove this afterwards
+  getData() {
+    return this.http.get(`https://finnhub.io/api/v1/stock/symbol?exchange=US&token=br2p5tvrh5rbm8ou56tg`)
+  }
+
 // intial SignIn calls 
   getSymbols(): Observable<Symbol[]> {
-    this.symbols = this.http.get<Symbol[]>(`${this.stockURL}${this.symbolURL}`)
-    if (this.symbols){
-      console.log(this.symbols)
-    } 
+    this.symbols = this.http.get<Symbol[]>(`${this.stockURL}${this.symbolURL}&${this.tokenURL}`)
+    // if (this.symbols){
+    //   console.log(this.symbols)
+    // } 
     return this.symbols;  
   }
 
-  getProfile(input:string){
-   this.profile = this.http.get(`${this.stockURL}${this.companyProfileURL}${input}`);
-   type Profile = {
-     country: string 
-     name: string 
-     logo: string 
-     market: number
-     url: string
-   }
-   let newprofile = <Profile>{
-    country:  this.profile.country, 
-    name: this.profile.name,
-    logo: this.profile.logo,
-    market: this.profile.marketCapilization,
-    url:  this.profile.weburl
-   }
-   return newprofile
-  }
+
+  
+  // getProfile(input:string){
+  //  this.profile = this.http.get(`${this.stockURL}${this.companyProfileURL}${input}`);
+  //  type Profile = {
+  //    country: string 
+  //    name: string 
+  //    logo: string 
+  //    market: number
+  //    url: string
+  //  }
+  //  let newprofile = <Profile>{
+  //   country:  this.profile.country, 
+  //   name: this.profile.name,
+  //   logo: this.profile.logo,
+  //   market: this.profile.marketCapilization,
+  //   url:  this.profile.weburl
+  //  }
+  //  return newprofile
+  // }
   
 
 
