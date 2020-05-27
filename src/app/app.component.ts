@@ -7,6 +7,5 @@ import { HomepageComponent } from './homepage/homepage.component';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  // change this into false
-  isSignedIn: boolean = true;
+
 }

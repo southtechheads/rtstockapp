@@ -20,8 +20,14 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import { AuthService } from './auth.service';
 import { AuthGuardService } from './auth.guard.service';
 import { environment } from '../environments/environment';
+
+import { StockpageComponent } from './stockpage/stockpage.component';
+import { StockchartComponent } from './stockpage/stockchart/stockchart.component';
+import { StockupdatesComponent } from './stockpage/stockupdates/stockupdates.component';
+
 import {StockService} from './stock.service';
 import { HttpClient } from '@angular/common/http';
+
 
 @NgModule({
   declarations: [
@@ -35,7 +41,9 @@ import { HttpClient } from '@angular/common/http';
     HeaderComponent,
     LoginFormComponent,
     SignUpComponent,
-    
+    StockpageComponent,
+    StockchartComponent,
+    StockupdatesComponent,
   ],
   imports: [
     BrowserModule,
