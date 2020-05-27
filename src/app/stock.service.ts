@@ -63,42 +63,46 @@ export class StockService {
   //  }
   //  return newprofile
   // }
-//get a quote 
-  public getQuote(quote:Quote){
-    let quoteurl= `${this.stockURL}${this.quoteURL}${this.symbol}${this.token}`;
-    return  this.http.get<Quote[]>(quoteurl);
-    }
-//TopMovers list for homepage
-  public   getTopMovers(){
-    let one = this.http.get(`${this.stockURL}${this.quoteURL}MSFT${this.token}`)
-    this.list.push(one)
-    let two = this.http.get(`${this.stockURL}${this.quoteURL}AAPL${this.token}`)
-    this.list.push(two)
-    let three = this.http.get(`${this.stockURL}${this.quoteURL}AMZN${this.token}`)
-    this.list.push(three)
-    let four = this.http.get(`${this.stockURL}${this.quoteURL}GOOGL${this.token}`)
-    this.list.push(four)
-    let five = this.http.get(`${this.stockURL}${this.quoteURL}INTL${this.token}`)
-    this.list.push(five)
-    return this.list;
-  
+  //get a quote
+  public getQuote(quote: Quote) {
+    let quoteurl = `${this.stockURL}${this.quoteURL}${this.symbol}${this.token}`;
+    return this.http.get<Quote[]>(quoteurl);
   }
+  //TopMovers list for homepage
+  getTopMovers() {
+    let moversArray = [];
 
- 
-
+    let one = this.http.get(
+      `${this.stockURL}${this.quoteURL}MSFT${this.token}`
+    );
+    moversArray.push(one);
+    let two = this.http.get(
+      `${this.stockURL}${this.quoteURL}AAPL${this.token}`
+    );
+    moversArray.push(two);
+    let three = this.http.get(
+      `${this.stockURL}${this.quoteURL}AMZN${this.token}`
+    );
+    moversArray.push(three);
+    let four = this.http.get(
+      `${this.stockURL}${this.quoteURL}GOOGL${this.token}`
+    );
+    moversArray.push(four);
+    let five = this.http.get(
+      `${this.stockURL}${this.quoteURL}INTL${this.token}`
+    );
+    moversArray.push(five);
+    return moversArray;
+  }
 }
-   
-
 
 // let x;
 // for(x of this.topMovers){
 // let newTopMover = this.http.get<Quote[]>(`${this.stockURL}${this.quoteURL}${x}${this.token}`);
-// let list = []; 
+// let list = [];
 // list.push(newTopMover);
-// return list  
+// return list
 // }
-  
-
 
 // }
 
@@ -115,5 +119,5 @@ export class StockService {
 //getprofile
 //company news
 // _.forEach(this.topMovers, function(symbol){
-  // let tmSymbol = this.symbol;
-  // return 
+// let tmSymbol = this.symbol;
+// return
