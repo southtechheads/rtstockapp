@@ -1,7 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AngularFireModule } from '@angular/fire';
-import {HttpClientModule} from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -25,9 +24,8 @@ import { StockpageComponent } from './stockpage/stockpage.component';
 import { StockchartComponent } from './stockpage/stockchart/stockchart.component';
 import { StockupdatesComponent } from './stockpage/stockupdates/stockupdates.component';
 
-import {StockService} from './stock.service';
-import { HttpClient } from '@angular/common/http';
-
+import { StockService } from './stock.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -50,7 +48,7 @@ import { HttpClient } from '@angular/common/http';
     AngularFireModule.initializeApp(environment.firebase),
     AppRoutingModule,
     CarouselModule.forRoot(),
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [AuthService, AuthGuardService, StockService],
   bootstrap: [AppComponent],

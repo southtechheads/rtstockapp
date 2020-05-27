@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { StockService  } from '../../../stock.service';
+
 
 
 @Component({
@@ -14,9 +16,14 @@ export class StockitemComponent implements OnInit {
   negative:boolean = Math.random() > 0.5 ? true: false;
 
 
-  constructor() { }
+  constructor(private stockService: StockService) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
+
+    this.stockService.getSymbols().subscribe((data) => {
+      console.log('get symbols...')
+      console.log(data)
+    })
   }
 
 }
