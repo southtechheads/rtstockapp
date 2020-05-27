@@ -24,9 +24,8 @@ import { StockpageComponent } from './stockpage/stockpage.component';
 import { StockchartComponent } from './stockpage/stockchart/stockchart.component';
 import { StockupdatesComponent } from './stockpage/stockupdates/stockupdates.component';
 
-import {StockService} from './stock.service';
+import { StockService } from './stock.service';
 import { HttpClientModule } from '@angular/common/http';
-
 
 @NgModule({
   declarations: [
@@ -49,7 +48,7 @@ import { HttpClientModule } from '@angular/common/http';
     AngularFireModule.initializeApp(environment.firebase),
     AppRoutingModule,
     CarouselModule.forRoot(),
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [AuthService, AuthGuardService, StockService],
   bootstrap: [AppComponent],
