@@ -39,24 +39,24 @@ export class StockService {
 
 
   
-  // getProfile(input:string){
-  //  this.profile = this.http.get(`${this.stockURL}${this.companyProfileURL}${input}`);
-  //  type Profile = {
-  //    country: string 
-  //    name: string 
-  //    logo: string 
-  //    market: number
-  //    url: string
-  //  }
-  //  let newprofile = <Profile>{
-  //   country:  this.profile.country, 
-  //   name: this.profile.name,
-  //   logo: this.profile.logo,
-  //   market: this.profile.marketCapilization,
-  //   url:  this.profile.weburl
-  //  }
-  //  return newprofile
-  // }
+  getProfile(input:string){
+   this.profile = this.http.get(`${this.stockURL}${this.companyProfileURL}${input}`);
+   type Profile = {
+     country: string 
+     name: string 
+     logo: string 
+     market: number
+     url: string
+   }
+   let newprofile = <Profile>{
+    country:  this.profile.country, 
+    name: this.profile.name,
+    logo: this.profile.logo,
+    market: this.profile.marketCapilization,
+    url:  this.profile.weburl
+   }
+   return newprofile
+  }
   
 
 
