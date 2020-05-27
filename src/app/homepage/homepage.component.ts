@@ -15,29 +15,30 @@ import {Quote} from '../models/quote';
 })
 export class HomepageComponent implements OnInit {
 
-  topMovers:any []= []; 
+  topMovers; 
   
   quote = new Quote;
   constructor(private stockService: StockService) { }
-
+ 
   
   ngOnInit() {
     console.log("loaded");
-    let onGetQuote= this.stockService.getQuote(this.quote).subscribe((quoteArr: any ) => {
-    this.quote = quoteArr;
-    console.log(quoteArr)
-    }, (error) => {
-      console.log(error)
-    })
-    console.log(this.quote)
    
-    let onGetTopMovers = this.stockService.getTopMovers(this.quote).subscribe(data => {
-      this.topMovers = data; 
-      console.log(this.topMovers)
-      console.log(data);
-    })
-    return this.quote, this.topMovers;
+      this.stockService.getTopMovers(list){
+        this.topMovers = list; 
+        console.log(list.json)
+        console.log(this.topMovers);
+      }
+      
+      
+  
+    
+    // let onGetTopMovers = this.stockService.getTopMovers().subscribe(list => {
+    //   
+    // })
+    // return this.topMovers;
   };
   
  
+
 }
