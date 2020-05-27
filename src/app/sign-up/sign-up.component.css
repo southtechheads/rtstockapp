@@ -1,10 +1,18 @@
-form{
-    padding-left: 30%;
-    padding-right: 30%;
+form {
+  padding-left: 30%;
+  padding-right: 30%;
 }
-#goBack{
-    margin-left: 10%;
+
+#goBack {
+  margin-left: 10%;
 }
-h1{
-    text-align: center;
+
+h1 {
+  text-align: center;
+}
+
+.v-spacing {
+  margin-top: 10%;
+  margin-bottom: 10%;
+  font-weight: lighter;
 }
