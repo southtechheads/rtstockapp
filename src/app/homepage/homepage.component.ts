@@ -4,6 +4,7 @@ import { SearchbarComponent } from './browse/searchbar/searchbar.component';
 import { CompanyComponent } from './browse/company/company.component';
 import { NewsComponent } from './news/news.component';
 import { StockService } from '../stock.service';
+import { AuthService } from '../auth.service';
 import { Observable } from 'rxjs';
 import { Quote } from '../models/quote';
 
@@ -16,14 +17,18 @@ export class HomepageComponent implements OnInit {
   topMovers;
 
   quote = new Quote();
-  constructor(private stockService: StockService) {}
+  constructor(
+    private stockService: StockService,
+    private authService: AuthService
+  ) {}
 
   ngOnInit() {
-    console.log('loaded');
+    console.log('loaded', this.authService.isAuthenticated());
 
     let getResponse = this.stockService.getTopMovers();
 
     console.log('Get top movers service test: ', getResponse);
+
     // {
     //   this.topMovers = list;
     //   console.log(list.json)

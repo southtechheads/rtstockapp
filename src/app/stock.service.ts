@@ -68,6 +68,7 @@ export class StockService {
     let quoteurl = `${this.stockURL}${this.quoteURL}${this.symbol}${this.token}`;
     return this.http.get<Quote[]>(quoteurl);
   }
+  
   //TopMovers list for homepage
   getTopMovers() {
     let moversArray = [];
