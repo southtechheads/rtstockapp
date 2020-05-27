@@ -9,6 +9,7 @@ import { auth } from 'firebase/app';
 })
 export class AuthService {
   constructor(private auth: AngularFireAuth) {}
+
   // private isUserLoggedIn;
   // private username;
 
@@ -36,7 +37,6 @@ export class AuthService {
       });
 
     if (firebaseAuthSignIn) {
-      console.log(firebaseAuthSignIn.user.uid);
       const userId = firebaseAuthSignIn.user.uid;
       //sa
       await localStorage.setItem('stockapp:uid', JSON.stringify(userId));
@@ -67,12 +67,12 @@ export class AuthService {
   }
 
   isAuthenticated() {
-    const promise = new Promise((resolve, reject) => {
-      setTimeout(() => {
-        resolve(this.loggedIn);
-      }, 1000);
-    });
-    return promise;
+    let currentUser = JSON.parse(localStorage.getItem('stockapp:uid'));
+
+    if (currentUser) {
+      return currentUser;
+    }
+    return;
   }
 
   login() {

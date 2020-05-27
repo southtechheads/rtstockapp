@@ -17,7 +17,8 @@ export class StockService {
   symbol: string = 'MSFT';
   profile: any;
   symbols: any;
-  topMovers: any[] = ['MSFT', 'AAPL', 'AMZN', 'GOOGL', 'FB', 'INTL'];
+  // topMovers = ['MSFT', 'AAPL', 'AMZN', 'GOOGL', 'FB', 'INTL'];
+  list;
 
   token: string = '&token=br2p5tvrh5rbm8ou56tg';
 
@@ -64,21 +65,47 @@ export class StockService {
   //  }
   //  return newprofile
   // }
-
+  //get a quote
   public getQuote(quote: Quote) {
     let quoteurl = `${this.stockURL}${this.quoteURL}${this.symbol}${this.token}`;
     return this.http.get<Quote[]>(quoteurl);
   }
+  
+  //TopMovers list for homepage
+  getTopMovers() {
+    let moversArray = [];
+
+    let one = this.http.get(
+      `${this.stockURL}${this.quoteURL}MSFT${this.token}`
+    );
+    moversArray.push(one);
+    let two = this.http.get(
+      `${this.stockURL}${this.quoteURL}AAPL${this.token}`
+    );
+    moversArray.push(two);
+    let three = this.http.get(
+      `${this.stockURL}${this.quoteURL}AMZN${this.token}`
+    );
+    moversArray.push(three);
+    let four = this.http.get(
+      `${this.stockURL}${this.quoteURL}GOOGL${this.token}`
+    );
+    moversArray.push(four);
+    let five = this.http.get(
+      `${this.stockURL}${this.quoteURL}INTL${this.token}`
+    );
+    moversArray.push(five);
+    return moversArray;
+  }
 }
 
-// getTopMovers(){
-//  let newTopMovers =  _.forEach(this.topMovers, function(symbol){
-//     this.quote = this.http.get(`${this.stockURL}${this.quoteURL}${symbol}`);
-//     console.log(this.quote);
-//     return this.quote;
-//   })
-//   console.log(newTopMovers);
-//   return newTopMovers;
+// let x;
+// for(x of this.topMovers){
+// let newTopMover = this.http.get<Quote[]>(`${this.stockURL}${this.quoteURL}${x}${this.token}`);
+// let list = [];
+// list.push(newTopMover);
+// return list
+// }
 
 // }
 
@@ -94,3 +121,6 @@ export class StockService {
 //calender earnings
 //getprofile
 //company news
+// _.forEach(this.topMovers, function(symbol){
+// let tmSymbol = this.symbol;
+// return

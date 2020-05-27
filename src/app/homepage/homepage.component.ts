@@ -3,35 +3,41 @@ import { StocklistComponent } from './stocklist/stocklist.component';
 import { SearchbarComponent } from './browse/searchbar/searchbar.component';
 import { CompanyComponent } from './browse/company/company.component';
 import { NewsComponent } from './news/news.component';
-import {StockService} from '../stock.service';
-import {Observable} from 'rxjs';
-import {Quote} from '../models/quote';
-
+import { StockService } from '../stock.service';
+import { AuthService } from '../auth.service';
+import { Observable } from 'rxjs';
+import { Quote } from '../models/quote';
 
 @Component({
   selector: 'app-homepage',
   templateUrl: './homepage.component.html',
-  styleUrls: ['./homepage.component.css']
+  styleUrls: ['./homepage.component.css'],
 })
 export class HomepageComponent implements OnInit {
+  topMovers;
 
-  topMovers:any []= []; 
-  
-  quote = new Quote;
-  constructor(private stockService: StockService) { }
+  quote = new Quote();
+  constructor(
+    private stockService: StockService,
+    private authService: AuthService
+  ) {}
 
-  
   ngOnInit() {
-    console.log("loaded");
-    let onGetQuote= this.stockService.getQuote(this.quote).subscribe((quoteArr: any ) => {
-    this.quote = quoteArr;
-    console.log(quoteArr)
-    }, (error) => {
-      console.log(error)
-    })
-  
-   return 
-    
-  }
+    console.log('loaded', this.authService.isAuthenticated());
 
+    let getResponse = this.stockService.getTopMovers();
+
+    console.log('Get top movers service test: ', getResponse);
+
+    // {
+    //   this.topMovers = list;
+    //   console.log(list.json)
+    //   console.log(this.topMovers);
+    // }
+
+    // let onGetTopMovers = this.stockService.getTopMovers().subscribe(list => {
+    //
+    // })
+    // return this.topMovers;
+  }
 }
