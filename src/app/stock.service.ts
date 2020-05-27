@@ -24,7 +24,9 @@ export class StockService {
   // companynewsURL '/company-news?symbol=AAPL&from=2020-04-30&to=2020-05-01'
   // earnings '/calendar/earnings?from=2010-01-01&to=2020-03-15&symbol=AAPL'
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    
+  }
 
   // test test test remove this afterwards
   getData() {
