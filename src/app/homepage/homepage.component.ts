@@ -29,9 +29,15 @@ export class HomepageComponent implements OnInit {
     }, (error) => {
       console.log(error)
     })
+    console.log(this.quote)
+   
+    let onGetTopMovers = this.stockService.getTopMovers(this.quote).subscribe(data => {
+      this.topMovers = data; 
+      console.log(this.topMovers)
+      console.log(data);
+    })
+    return this.quote, this.topMovers;
+  };
   
-   return 
-    
-  }
-
+ 
 }

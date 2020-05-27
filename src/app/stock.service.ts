@@ -62,22 +62,24 @@ export class StockService {
     return  this.http.get<Quote[]>(quoteurl);
     }
   
+  public   getTopMovers(quote:Quote){
+    let x;
+    for(x of this.topMovers){
+    let newTopMover = this.http.get<Quote[]>(`${this.stockURL}${this.quoteURL}${x}${this.token}`);
+    let list = []; 
+    list.push(newTopMover);
+    return list  
+    }
+  }
+
+ 
+
 }
    
 
 
 
-   // getTopMovers(){
-  //  let newTopMovers =  _.forEach(this.topMovers, function(symbol){
-  //     this.quote = this.http.get(`${this.stockURL}${this.quoteURL}${symbol}`);
-  //     console.log(this.quote);
-  //     return this.quote;
-  //   })
-  //   console.log(newTopMovers);
-  //   return newTopMovers;
   
-
-  // }
 
 
 
@@ -93,3 +95,6 @@ export class StockService {
 //calender earnings
 //getprofile
 //company news
+// _.forEach(this.topMovers, function(symbol){
+  // let tmSymbol = this.symbol;
+  // return 
