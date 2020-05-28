@@ -22,10 +22,10 @@ export class LoginFormComponent implements OnInit {
       let signInStatus = this.authService.firebaseSignIn(email, password);
       // console.log('status: ', signInStatus);
       if (signInStatus) {
-        console.log('signInStatus: ', signInStatus);
+        console.log('signInStatus: true', signInStatus);
         // this.authService.login();
         // this.router.navigate(['home']);
-        return false;
+        return true;
       }
       console.log('signInStatus false : ', signInStatus);
     }
