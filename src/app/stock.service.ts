@@ -6,7 +6,7 @@ import {
 } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 
-import { retry, catchError } from 'rxjs/operators';
+import { retry, catchError, timeout, delay } from 'rxjs/operators';
 import * as _ from 'lodash';
 import { Quote } from './models/quote';
 
@@ -102,20 +102,17 @@ export class StockService {
 
   getTopMovers() {
     this.topArray.map((item) => {
-      // console.log(item);
-      setTimeout(() => {
-        console.log('test timeout');
-        this.http
-          .get(`${this.stockURL}${this.quoteURL}${item}&${this.tokenURL}`)
-          .subscribe((data) => {
-            let obj: { [key: string]: any } = data;
+      this.http
+        .get(`${this.stockURL}${this.quoteURL}${item}&${this.tokenURL}`)
+        .pipe(timeout(5000))
+        .subscribe((data) => {
+          let obj: { [key: string]: any } = data;
 
-            obj.symbol = item;
-            // console.log('look at me: ', obj);
-            this.quotes.push(data);
-          });
-      });
-    }, 1200);
+          obj.symbol = item;
+          // console.log('look at me: ', obj);
+          this.quotes.push(data);
+        });
+    });
 
     return this.quotes;
   }
