@@ -103,16 +103,19 @@ export class StockService {
   getTopMovers() {
     this.topArray.map((item) => {
       // console.log(item);
-      this.http
-        .get(`${this.stockURL}${this.quoteURL}${item}&${this.tokenURL}`)
-        .subscribe((data) => {
-          let obj: { [key: string]: any } = data;
+      setTimeout(() => {
+        console.log('test timeout');
+        this.http
+          .get(`${this.stockURL}${this.quoteURL}${item}&${this.tokenURL}`)
+          .subscribe((data) => {
+            let obj: { [key: string]: any } = data;
 
-          obj.symbol = item;
-          // console.log('look at me: ', obj);
-          this.quotes.push(data);
-        });
-    });
+            obj.symbol = item;
+            // console.log('look at me: ', obj);
+            this.quotes.push(data);
+          });
+      });
+    }, 1200);
 
     return this.quotes;
   }
