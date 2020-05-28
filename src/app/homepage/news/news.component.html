@@ -2,13 +2,14 @@
   <carousel>
     <slide *ngFor="let news of newslist; index as i">
       <div class="text-center py-5 bg-light text-dark">
-        <h2> {{ news.title }}</h2>
+        <h4><a href="{{news.url}}" class="text-dark"> {{ news.headline}} </a> </h4>
         <hr>
         <br><br>
         <div class="lead">
-          <h5> {{ news.headline }} </h5>
-          <p> {{ news.description}} </p>
+          <h5> Source: {{ news.source }} </h5>
           <br>
+          <p style="width: 300px; margin:auto;"> {{ news.summary }} </p>
+          <br> 
         </div>
       </div>
     </slide>

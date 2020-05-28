@@ -30,9 +30,8 @@ export class HomepageComponent implements OnInit {
     //   // this.products = data;
     // });
 
-    let testApi = this.stockService.getTopMovers();
-
-    console.log('testing api: ', testApi);
+    // let testApi = this.stockService.getTopMovers();
+    // console.log('testing api: ', testApi);
 
     // this.stockService.getTopMovers().subscribe((data: any[]) => {
     //   console.log('Get top movers service test: ', data);
