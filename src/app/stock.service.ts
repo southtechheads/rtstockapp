@@ -23,7 +23,7 @@ export class StockService {
   public quoteURL: string = '/quote?symbol=';
   firebaseURL: string = 'https://stockappdb.firebaseio.com/';
   symbol: string = 'MSFT';
-  profile: any;
+  profile = [];
   symbols: any;
   topArray: string[] = [
     'MSFT',
@@ -75,12 +75,13 @@ export class StockService {
     // }
     return this.symbols;
   }
-//input:string
-  getProfile(){
-  this.profile = this.http.get(`https://finnhub.io/api/v1/stock/profile2?symbol=AAPL&token=br2p5tvrh5rbm8ou56tg`)
-  .subscribe(data => console.log(data))
-
-
+//
+  getProfile(input:string){
+  this.http.get(`${this.stockURL}${this.companyProfileURL}${input}${this.token}`)
+  .subscribe((data) => {
+    console.log(data) 
+    this.profile.push(data);
+  });
    return this.profile
   }
   //get a quote
