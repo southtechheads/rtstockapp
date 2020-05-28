@@ -1,6 +1,6 @@
 <div class="stocklist">
-  <p class="align-text-bottom text-center list-header bg-dark">TOP 10 MOVERS TODAY</p>
-  <div *ngFor="let stocks of stocks">
-    <app-stockitem></app-stockitem>
+  <p class="align-text-bottom text-center list-header bg-dark">TOP MOVERS TODAY</p>
+  <div >
+    <app-stockitem *ngFor="let stock of stocks" [stockName]="stock.symbol" [stockValue]="stock.current" [stockPrevious]="stock.previous"></app-stockitem>
   </div>
 </div>
