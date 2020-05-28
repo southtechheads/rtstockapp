@@ -110,19 +110,6 @@ export class StockService {
         }, (error) => {
           console.log('error occurred : ' + error)
         });
-
-      // setTimeout(() => {
-      //   console.log('test timeout');
-      //   this.http
-      //     .get(`${this.stockURL}${this.quoteURL}${item}&${this.tokenURL}`)
-      //     .subscribe((data) => {
-      //       let obj: { [key: string]: any } = data;
-
-      //       obj.symbol = item;
-      //       // console.log('look at me: ', obj);
-      //       this.quotes.push(data);
-      //     });
-      // },1200);
     });
 
     return this.quotes;
