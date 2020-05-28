@@ -5,8 +5,7 @@ import {
   HttpErrorResponse,
 } from '@angular/common/http';
 
-import { Observable, throwError } from 'rxjs';
-import { retry, catchError } from 'rxjs/operators';
+import { retry, catchError, timeout, delay } from 'rxjs/operators';
 import * as _ from 'lodash';
 import { Quote } from './models/quote';
 
@@ -100,15 +99,15 @@ export class StockService {
   //get top movers data
   getTopMovers() {
     this.topArray.map((item) => {
-      this.http.get(`${this.stockURL}${this.quoteURL}${item}&${this.tokenURL}`)
+      this.http
+        .get(`${this.stockURL}${this.quoteURL}${item}&${this.tokenURL}`)
+        .pipe(timeout(5000))
         .subscribe((data) => {
-          let obj: { [key: string]: any } = { symbol: item, current: data["c"], previous: data["pc"] }
+          let obj: { [key: string]: any } = data;
           obj.symbol = item;
           obj.current = data["c"];
           obj.previous = data["pc"];
           this.quotes.push(obj);
-        }, (error) => {
-          console.log('error occurred : ' + error)
         });
     });
 
