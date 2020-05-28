@@ -20,11 +20,14 @@ export class LoginFormComponent implements OnInit {
 
     if (email && password) {
       let signInStatus = this.authService.firebaseSignIn(email, password);
-
+      // console.log('status: ', signInStatus);
       if (signInStatus) {
-        this.authService.login();
-        this.router.navigate(['home']);
+        console.log('signInStatus: ', signInStatus);
+        // this.authService.login();
+        // this.router.navigate(['home']);
+        return false;
       }
+      console.log('signInStatus false : ', signInStatus);
     }
     return false;
     // if (email == 'admin@gmail.com' && password == '12345') {

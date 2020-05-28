@@ -9,6 +9,7 @@ import { auth } from 'firebase/app';
 })
 export class AuthService {
   constructor(private auth: AngularFireAuth) {}
+
   // private isUserLoggedIn;
   // private username;
 
@@ -25,25 +26,34 @@ export class AuthService {
   // }
   loggedIn: boolean;
 
-  async firebaseSignIn(email, password) {
-    const firebaseAuthSignIn = await this.auth
+  firebaseSignIn(email, password) {
+    let currentUser;
+
+    this.auth
       .signInWithEmailAndPassword(email, password)
+      .then((user) => {
+        console.log('user ', user);
+        currentUser = user;
+      })
       .catch(function (error) {
         // Handle Errors here.
-        var errorCode = error.code;
-        var errorMessage = error.message;
+        let errorCode = error.code;
+        let errorMessage = error.message;
         // ...
+        console.log('error: ', errorMessage);
+        currentUser = {};
       });
 
-    if (firebaseAuthSignIn) {
-      console.log(firebaseAuthSignIn.user.uid);
-      const userId = firebaseAuthSignIn.user.uid;
-      //sa
-      await localStorage.setItem('stockapp:uid', JSON.stringify(userId));
+    // if (firebaseAuthSignIn) {
+    //   const user = firebaseAuthSignIn.user;
+    //   //sa
+    //   await localStorage.setItem('stockapp:user', JSON.stringify(user));
 
-      return true;
-    }
-    return false;
+    //   return true;
+    // } else {
+    //   return false;
+    // }
+    return currentUser;
   }
 
   async firebaseSignUp(email, password) {
@@ -67,12 +77,14 @@ export class AuthService {
   }
 
   isAuthenticated() {
-    const promise = new Promise((resolve, reject) => {
-      setTimeout(() => {
-        resolve(this.loggedIn);
-      }, 1000);
-    });
-    return promise;
+    let currentUser = JSON.parse(localStorage.getItem('stockapp:user'));
+
+    console.log('authenticated: ', currentUser);
+
+    if (currentUser) {
+      return currentUser;
+    }
+    return null;
   }
 
   login() {

@@ -20,10 +20,14 @@ export class StockitemComponent implements OnInit {
 
   ngOnInit() {
 
-    this.stockService.getSymbols().subscribe((data) => {
-      console.log('get symbols...')
-      console.log(data)
-    })
+  
   }
 
 }
+
+
+
+  // this.stockService.getSymbols().subscribe((data) => {
+    //   console.log('get symbols...')
+    //   console.log(data)
+    // })
