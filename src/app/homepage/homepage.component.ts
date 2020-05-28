@@ -25,9 +25,20 @@ export class HomepageComponent implements OnInit {
   ngOnInit() {
     console.log('loaded', this.authService.isAuthenticated());
 
-    let getResponse = this.stockService.getTopMovers();
+    // this.stockService.getTopMovers().subscribe((data: any[]) => {
+    //   console.log(data);
+    //   // this.products = data;
+    // });
 
-    console.log('Get top movers service test: ', getResponse);
+    let testApi = this.stockService.getTopMovers();
+
+    console.log('testing api: ', testApi);
+
+    // this.stockService.getTopMovers().subscribe((data: any[]) => {
+    //   console.log('Get top movers service test: ', data);
+    // });
+
+    // console.log('Get top movers service test: ', getResponse);
 
     // {
     //   this.topMovers = list;
