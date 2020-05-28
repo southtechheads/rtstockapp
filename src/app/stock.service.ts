@@ -75,25 +75,14 @@ export class StockService {
     // }
     return this.symbols;
   }
+//input:string
+  getProfile(){
+  this.profile = this.http.get(`https://finnhub.io/api/v1/stock/profile2?symbol=AAPL&token=br2p5tvrh5rbm8ou56tg`)
+  .subscribe(data => console.log(data))
 
-  // getProfile(input:string){
-  //  this.profile = this.http.get(`${this.stockURL}${this.companyProfileURL}${input}`);
-  //  type Profile = {
-  //    country: string
-  //    name: string
-  //    logo: string
-  //    market: number
-  //    url: string
-  //  }
-  //  let newprofile = <Profile>{
-  //   country:  this.profile.country,
-  //   name: this.profile.name,
-  //   logo: this.profile.logo,
-  //   market: this.profile.marketCapilization,
-  //   url:  this.profile.weburl
-  //  }
-  //  return newprofile
-  // }
+
+   return this.profile
+  }
   //get a quote
   public getQuote(quote: Quote) {
     let quoteurl = `${this.stockURL}${this.quoteURL}${this.symbol}${this.token}`;
@@ -192,3 +181,28 @@ export class StockService {
 // _.forEach(this.topMovers, function(symbol){
 // let tmSymbol = this.symbol;
 // return
+// type Profile = {
+//   address: string 
+//   city: string
+//   state: string 
+//   country: string
+//   name: string
+//   ticker: string
+//   logo: string
+//   desc: string
+//   url: string
+//   gsector: string
+
+// }
+// let newprofile = <Profile>{
+//  address: this.profile.address,
+//  city: this.profile.city,
+//  state: this.profile.state,
+//  country:  this.profile.country,
+//  name: this.profile.name,
+//  ticker: this.profile.ticker,
+//  logo: this.profile.logo,
+//  desc: this.profile.desc,
+//  gsector: this.profile.gsector,
+//  url:  this.profile.weburl
+// }

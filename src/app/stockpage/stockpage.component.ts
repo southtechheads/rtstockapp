@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { StockchartComponent } from './stockchart/stockchart.component';
-
+import {StockService} from '../stock.service';
 
 @Component({
   selector: 'app-stockpage',
@@ -16,9 +16,17 @@ export class StockpageComponent implements OnInit {
   stockCost = this.stockPrice;
 
 
-  constructor() { }
+  constructor(
+    private stockService: StockService
+  ) { }
 
   ngOnInit(): void {
+   let test = this.stockService.getProfile();
+   console.log('test', test);
+
   }
+
+
+
 
 }
