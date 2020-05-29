@@ -23,7 +23,7 @@ const routes: Routes = [
     component: HomepageComponent,
   },
   {
-    path: 'stock',
+    path: 'stock/:symbol',
     component: StockpageComponent,
   },
 ];
@@ -32,4 +32,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }
