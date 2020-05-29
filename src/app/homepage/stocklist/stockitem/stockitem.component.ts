@@ -1,6 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { StockService  } from '../../../stock.service';
+import { StockService } from '../../../stock.service';
 import { HttpClient } from '@angular/common/http';
+// import { Router } from '@angular/router';
+
 
 
 @Component({
@@ -11,10 +13,10 @@ import { HttpClient } from '@angular/common/http';
 export class StockitemComponent implements OnInit {
 
   //the following vars are created to test the UI
-  @Input() stockName:string ;
-  @Input() stockValue:number ;
-  @Input() stockPrevious:number ;
-  @Input() negative:boolean;
+  @Input() stockName: string;
+  @Input() stockValue: number;
+  @Input() stockPrevious: number;
+  @Input() negative: boolean;
 
   constructor(private stockService: StockService, private httpClient: HttpClient) { }
 

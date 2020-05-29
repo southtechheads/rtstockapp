@@ -1,6 +1,6 @@
 <!-- please revise stockitem.ts for actual values -->
 <div class="justify-content-center">
-  <a routerLink="/stock" role="button">
+  <a [routerLink]="['/stock/', stockName]" role="button">
     <p class="px-5 text-dark">{{ stockName }}
       <span class="h-spacing">
         <span *ngIf="negative" class="material-icons" style="font-size:15px;color:red;font-weight:bolder">
