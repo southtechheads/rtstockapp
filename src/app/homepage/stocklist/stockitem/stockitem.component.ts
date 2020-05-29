@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { StockService  } from '../../../stock.service';
+import { Component, OnInit, Input } from '@angular/core';
+import { StockService } from '../../../stock.service';
+import { HttpClient } from '@angular/common/http';
+// import { Router } from '@angular/router';
 
 
 
@@ -10,24 +12,16 @@ import { StockService  } from '../../../stock.service';
 })
 export class StockitemComponent implements OnInit {
 
-  //the following var are created to test the UI
-  stockName:string = `STOCK${Math.floor(Math.random() * 100)}`
-  stockValue:number = Math.random() * 100 + Math.random();
-  negative:boolean = Math.random() > 0.5 ? true: false;
+  //the following vars are created to test the UI
+  @Input() stockName: string;
+  @Input() stockValue: number;
+  @Input() stockPrevious: number;
+  @Input() negative: boolean;
 
-
-  constructor(private stockService: StockService) { }
+  constructor(private stockService: StockService, private httpClient: HttpClient) { }
 
   ngOnInit() {
-
-  
+    this.negative = this.stockPrevious > this.stockValue ? true : false;
   }
 
 }
-
-
-
-  // this.stockService.getSymbols().subscribe((data) => {
-    //   console.log('get symbols...')
-    //   console.log(data)
-    // })

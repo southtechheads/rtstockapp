@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { StockService } from '../../stock.service';
 
 @Component({
   selector: 'app-stocklist',
@@ -7,11 +8,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StocklistComponent implements OnInit {
 
-  //for testing only
-  stocks:string[] = ['stock 1','stock 2','stock 3','stock 3','stock 3','stock 3','stock 3','stock 3','stock 3','stock 3']
-  constructor() { }
+  stocks;
 
-  ngOnInit(): void {
+  constructor(private stockService: StockService) { }
+
+  ngOnInit() {
+    this.stocks = this.stockService.getTopMovers();
+    console.log('stocks array ', this.stocks);
+    this.stocks.map((element) => {
+      console.log(element)
+      return { symbol: element.symbol, current: element.current, previous: element.previous }
+    })
+
+    this.stockService.getSymbols().subscribe((data) => {
+      console.log(data);
+    })
   }
 
 }

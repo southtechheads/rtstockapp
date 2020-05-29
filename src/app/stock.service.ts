@@ -4,7 +4,6 @@ import {
   HttpHeaders,
   HttpErrorResponse,
 } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
 
 import { retry, catchError, timeout, delay } from 'rxjs/operators';
 import * as _ from 'lodash';
@@ -14,10 +13,12 @@ import { Quote } from './models/quote';
   providedIn: 'root',
 })
 export class StockService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
+  token: string = '&token=br2p5tvrh5rbm8ou56tg';
   stockURL: string = 'https://finnhub.io/api/v1';
   symbolURL: string = '/stock/symbol?exchange=US';
+  newsURL: string = '/news?category=general';
   companyProfileURL: string = '/stock/profile2?symbol=';
   public tokenURL: string = 'token=br2p5tvrh5rbm8ou56tg';
   public quoteURL: string = '/quote?symbol=';
@@ -40,40 +41,33 @@ export class StockService {
     'UAA',
     'LVMHF',
     'NKE',
-    'HON',
-    'HESAY',
-    'MRO',
-    'XOM',
-    'CVX',
-    'JNJ',
-    'HD',
-    'CGC',
+    'HON'
+    // 'HESAY',
+    // 'MRO',
+    // 'XOM',
+    // 'CVX',
+    // 'JNJ',
+    // 'HD',
+    // 'CGC',
   ];
-  list;
-  // quotes: Quote[] = [];
-  private quotes = [];
 
-  token: string = '&token=br2p5tvrh5rbm8ou56tg';
+
+  // quotes: Quote[] = [];
+  quotes = [];
+
+
 
   // companynewsURL '/company-news?symbol=AAPL&from=2020-04-30&to=2020-05-01'
   // earnings '/calendar/earnings?from=2010-01-01&to=2020-03-15&symbol=AAPL'
 
-  // test test test remove this afterwards
-  getData() {
-    return this.http.get(
-      `https://finnhub.io/api/v1/stock/symbol?exchange=US&token=br2p5tvrh5rbm8ou56tg`
-    );
+  //get list of symbols
+  getSymbols() {
+    return this.http.get(`${this.stockURL}${this.symbolURL}&${this.tokenURL}`);
   }
 
-  // intial SignIn calls
-  getSymbols(): Observable<Symbol[]> {
-    this.symbols = this.http.get<Symbol[]>(
-      `${this.stockURL}${this.symbolURL}&${this.tokenURL}`
-    );
-    // if (this.symbols){
-    //   console.log(this.symbols)
-    // }
-    return this.symbols;
+  //get news general category
+  getNews(){
+    return this.http.get(`${this.stockURL}${this.newsURL}&${this.tokenURL}`)
   }
 //
   getProfile(input:string){
@@ -85,11 +79,14 @@ export class StockService {
    return this.profile
   }
   //get a quote
+
   public getQuote(quote: Quote) {
     let quoteurl = `${this.stockURL}${this.quoteURL}${this.symbol}${this.token}`;
     return this.http.get<Quote[]>(quoteurl);
   }
 
+
+  //get top movers data
   getTopMovers() {
     this.topArray.map((item) => {
       this.http
@@ -97,75 +94,21 @@ export class StockService {
         .pipe(timeout(5000))
         .subscribe((data) => {
           let obj: { [key: string]: any } = data;
-
           obj.symbol = item;
-          // console.log('look at me: ', obj);
-          this.quotes.push(data);
+          obj.current = data["c"];
+          obj.previous = data["pc"];
+          this.quotes.push(obj);
         });
     });
 
     return this.quotes;
   }
 
-  // getTopMovers(): Observable<Quote[]> {
-  //   // let moversArray = [];
-  //   this.http
-  //     .get<Quote[]>(`${this.stockURL}${this.quoteURL}AAPL&${this.tokenURL}`)
-  //     .subscribe((data: any[]) => {
-  //       console.log(data);
-  //       this.quotes.push(data);
-  //     });
-
-  //   // let two = this.http.get<Quote[]>(
-  //   //   `${this.stockURL}${this.quoteURL}AMZN&${this.tokenURL}`
-  //   // );
-
-  //   // moversArray.push(two);
-  //   // if (this.symbols){
-  //   //   console.log(this.symbols)
-  //   // }
-  //   return this.quotes;
-  // }
-
-  //TopMovers list for homepage
-  // public getTopMovers() {
-  //   let moversArray = [];
-
-  //   let one = this.http.get(
-  //     `https://finnhub.io/api/v1/quote?symbol=AAPL&token=br2p5tvrh5rbm8ou56tg`
-  //   );
-  //   // moversArray.push(one);
-  //   // let two = this.http.get(
-  //   //   `${this.stockURL}${this.quoteURL}AAPL&${this.tokenURL}`
-  //   // );
-  //   // moversArray.push(two);
-  //   // let three = this.http.get(
-  //   //   `${this.stockURL}${this.quoteURL}AMZN&${this.tokenURL}`
-  //   // );
-  //   // moversArray.push(three);
-  //   // let four = this.http.get(
-  //   //   `${this.stockURL}${this.quoteURL}GOOGL&${this.tokenURL}`
-  //   // );
-  //   // moversArray.push(four);
-  //   // let five = this.http.get(
-  //   //   `${this.stockURL}${this.quoteURL}INTL&${this.tokenURL}`
-  //   // );
-  //   // moversArray.push(five);
-
-  //   console.log('request: ', one);
-  //   return one;
-  // }
 }
 
-// let x;
-// for(x of this.topMovers){
-// let newTopMover = this.http.get<Quote[]>(`${this.stockURL}${this.quoteURL}${x}${this.token}`);
-// let list = [];
-// list.push(newTopMover);
-// return list
-// }
 
-// }
+
+
 
 // functions we want
 //SignIn()

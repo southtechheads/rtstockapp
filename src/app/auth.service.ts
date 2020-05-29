@@ -8,7 +8,12 @@ import { auth } from 'firebase/app';
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(private auth: AngularFireAuth) {}
+  private getUser: any;
+  private loggedIn: boolean;
+  constructor(private auth: AngularFireAuth) {
+    this.getUser = this.auth.user;
+    this.loggedIn = false;
+  }
 
   // private isUserLoggedIn;
   // private username;
@@ -24,36 +29,33 @@ export class AuthService {
   // getUserLoggedIn() {
   //     return this.isUserLoggedIn;
   // }
-  loggedIn: boolean;
 
-  firebaseSignIn(email, password) {
-    let currentUser;
+  currentUser: any = {};
 
-    this.auth
-      .signInWithEmailAndPassword(email, password)
-      .then((user) => {
-        console.log('user ', user);
-        currentUser = user;
-      })
-      .catch(function (error) {
-        // Handle Errors here.
-        let errorCode = error.code;
-        let errorMessage = error.message;
-        // ...
-        console.log('error: ', errorMessage);
-        currentUser = {};
-      });
+  private setSignedInUser(data: any) {
+    const { uid, email } = data;
 
-    // if (firebaseAuthSignIn) {
-    //   const user = firebaseAuthSignIn.user;
-    //   //sa
-    //   await localStorage.setItem('stockapp:user', JSON.stringify(user));
+    this.currentUser.uid = uid;
+    this.currentUser.email = email;
 
-    //   return true;
-    // } else {
-    //   return false;
-    // }
-    return currentUser;
+    console.log('check user data: ', this.currentUser);
+    localStorage.setItem('stockapp:user', JSON.stringify(this.currentUser));
+    this.loggedIn = true;
+  }
+
+  async firebaseSignIn(email, password) {
+    let getData = await this.auth.signInWithEmailAndPassword(email, password);
+
+    let getDataUser = await getData.user;
+
+    if (getDataUser) {
+      await this.setSignedInUser(getDataUser);
+      return true;
+    } else {
+      return false;
+    }
+
+    // return isLoggedIn;
   }
 
   async firebaseSignUp(email, password) {
