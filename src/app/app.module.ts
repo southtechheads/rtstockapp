@@ -22,7 +22,6 @@ import { environment } from '../environments/environment';
 
 import { StockpageComponent } from './stockpage/stockpage.component';
 import { StockchartComponent } from './stockpage/stockchart/stockchart.component';
-import { StockupdatesComponent } from './stockpage/stockupdates/stockupdates.component';
 
 import { StockService } from './stock.service';
 import { HttpClientModule } from '@angular/common/http';
@@ -41,7 +40,6 @@ import { HttpClientModule } from '@angular/common/http';
     SignUpComponent,
     StockpageComponent,
     StockchartComponent,
-    StockupdatesComponent,
   ],
   imports: [
     BrowserModule,
