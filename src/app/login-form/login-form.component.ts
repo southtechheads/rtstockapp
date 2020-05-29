@@ -24,7 +24,7 @@ export class LoginFormComponent implements OnInit {
       if (signInStatus) {
         console.log('signInStatus: true', signInStatus);
         // this.authService.login();
-        // this.router.navigate(['home']);
+        this.router.navigate(['home']);
         return true;
       }
       console.log('signInStatus false : ', signInStatus);
