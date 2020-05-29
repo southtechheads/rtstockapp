@@ -1,9 +1,10 @@
 <form class="form-inline justify-content-center">
   <input class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Browse here using symbol"
-    aria-label="Search">
-  <div class="input-group-append">
+    aria-label="Search" [(ngModel)]="stockName" value="{{stockName}}"
+    (keyup)="onKey($event)">
+  <a class="input-group-append btn-light" [routerLink]="['/stock/', stockName]" role="button">
     <span class="material-icons">
       search
     </span>
-  </div>
+  </a>
 </form>

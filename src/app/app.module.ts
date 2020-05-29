@@ -26,6 +26,7 @@ import { StockchartComponent } from './stockpage/stockchart/stockchart.component
 
 import { StockService } from './stock.service';
 import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { HttpClientModule } from '@angular/common/http';
     AppRoutingModule,
     CarouselModule.forRoot(),
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule
   ],
   providers: [AuthService, AuthGuardService, StockService],
   bootstrap: [AppComponent],

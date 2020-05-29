@@ -8,9 +8,32 @@ import {StockService} from '../../../stock.service';
 })
 export class SearchbarComponent implements OnInit {
 
+  stockName = 'AAPL'
+  
+  sampleList = ["AA",
+  "AAN",
+  "AAP",
+  "AAT",
+  "AB",
+  "ABB",
+  "ABBV",
+  "ABC"]
+
   constructor(private stockService: StockService) { }
   
-  ngOnInit(): void {
+  ngOnInit() {
+
+  }
+
+  onKey(event:any){
+    if(!this.stockName || null){
+      this.stockName = 'AAPL'
+    } else{
+      this.sampleList.filter((element) => {
+        element = event.target.value;
+        this.stockName = element;
+      })
+    }
   }
 
 
