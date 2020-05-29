@@ -60,17 +60,19 @@
           </a>
           <h4>
             <span class="mr-3"
-              style="font-weight: lighter; color: gray; font-size: smaller;">{{ stockPrice.c | currency}}</span>
+              style=" color: gray; font-size: smaller; font-family:'Roboto';">{{ stockPrice.c | currency}}</span>
             <span class="h-spacing" [ngStyle]="negative ?{'color': 'red'} : {'color': 'green'}"
-              style="font-weight: lighter; font-size: 20px;">
+              style=" font-size: 20px; font-family:'Roboto';">
               (
               <em>{{ growth | percent:'.3' }}</em>
+
               <span *ngIf="negative" class="material-icons" style="font-size:20px;color:red;font-weight:bolder">
                 arrow_downward
               </span>
               <span *ngIf="!negative" class="material-icons" style="font-size:20px;color:green;font-weight:bolder">
                 arrow_upward
               </span>
+
               )
             </span>
           </h4>
