@@ -114,6 +114,17 @@ export class StockService {
     return this.quotes;
   }
 
+
+  //for testing only... remove after
+  getData(input:string){
+    return this.http.get(`${this.stockURL}${this.companyProfileURL}${input}&${this.tokenURL}`)
+  }
+
+  //get current price
+  getPrice(input:string){
+    return this.http.get(`https://finnhub.io/api/v1/quote?symbol=${input}&${this.tokenURL}`)
+  }
+
 }
 
 

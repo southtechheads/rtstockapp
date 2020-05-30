@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { StockchartComponent } from './stockchart/stockchart.component';
-
+import { StockService } from '../stock.service';
+import { ActivatedRoute, Params} from '@angular/router';
 
 @Component({
   selector: 'app-stockpage',
@@ -10,15 +11,46 @@ import { StockchartComponent } from './stockchart/stockchart.component';
 export class StockpageComponent implements OnInit {
 
   //stock data
-  stockName = 'Lorem Ipsum';
-  stockPrice = Math.random() * 100 + Math.random();
-  stockDescription = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. '
-  stockCost = this.stockPrice;
+
+  companyProfile;
+
+  stockPrice;
+  stockShares;
+  stockCost;
+  symbol;
+  negative;
+  growth;
 
 
-  constructor() { }
+  constructor(private stockService: StockService, private route: ActivatedRoute) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
+    
+
+    //get symbol from current route's params
+    this.symbol = this.route.snapshot.params['symbol'];
+    this.route.params.subscribe((params: Params) => {
+      this.symbol = params['symbol'];
+      this.symbol = this.symbol.toUpperCase();
+    })
+
+
+    this.stockService.getData(this.symbol).subscribe((data) => {
+      console.log(data);
+      this.companyProfile = data;
+    })
+
+    this.stockService.getPrice(this.symbol).subscribe((data) => {
+      
+      this.stockPrice = data;
+      this.negative = this.stockPrice["pc"] > this.stockPrice["c"] ? true : false;
+      this.growth = (this.stockPrice["c"] - this.stockPrice["pc"]) / this.stockPrice["c"];
+    })
+
+  }
+
+  onKey(event:any){
+    this.stockCost = this.stockPrice["c"] * this.stockShares;
   }
 
 }
