@@ -9,18 +9,27 @@
   </a>
 </form> -->
 
-<form class = "tp-form">
+<form class = "tp-form row">
   <mat-form-field class = "tp-full-width">
      <input type = "text" 
         placeholder = "Browse here using symbol" 
         aria-label = "Number" 
         matInput 
         [formControl] = "myControl" 
-        [matAutocomplete] = "auto">
+        [matAutocomplete] = "auto"
+        #linkVal
+        [(ngModel)]="query"
+        >
      <mat-autocomplete #auto = "matAutocomplete">
-        <mat-option *ngFor = "let symbol of symbols" [value] = "symbol.value">
+        <mat-option *ngFor = "let symbol of symbols | search:'value,display':query" [value] = "symbol.value">
            {{symbol.display}}
         </mat-option>
      </mat-autocomplete>
   </mat-form-field>
+  <button class="input-group-append btn btn-light search-btn" type="button" (click)="onBrowse(linkVal.value)">
+    <span class="material-icons">
+      search
+    </span>
+  </button>
 </form>
+

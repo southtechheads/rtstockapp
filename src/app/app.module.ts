@@ -29,6 +29,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatInputModule } from '@angular/material/input';
+import { SearchPipe } from './search.pipe';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { MatInputModule } from '@angular/material/input';
     SignUpComponent,
     StockpageComponent,
     StockchartComponent,
+    SearchPipe,
   ],
   imports: [
     BrowserModule,
