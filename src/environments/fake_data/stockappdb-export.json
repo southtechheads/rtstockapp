@@ -20,22 +20,51 @@
     },
     "Brian" : {
       "balance" : 10000,
-      "myStocks" : [ "GE", "F", "HST", "GSI" ],
-      "watchList" : [ "VZ", "CSCO" ]
+      "myStocks" : {
+        "GE": 20,
+         "F": 5,
+         "HST": 35,
+         "GSI":2
+      },
+      "watchList" : {
+        "VZ": true,
+        "CSCO": true 
+      }
     },
     "Darrien" : {
       "balance" : 60000,
-      "myStocks" : [ "SBUX", "FIT", "BTC", "ADDYY" ],
-      "watchList" : [ "MRO", "XOM" ]
+      "myStocks" : {
+        "SBUX": 100, 
+        "FIT": 45,
+        "BTC": 400,
+        "ADDYY":1 
+      },
+      "watchList" : {
+        "MRO": true, 
+        "XOM": true 
+      }
     },
     "Jessica" : {
       "balance" : 200000,
-      "myStocks" : [ "SNAP", "AAPL", "TSLA", "NFLX" ],
-      "watchList" : [ "CSCO" ]
-    },
+      "myStocks" : {
+        "SNAP":15,
+        "AAPL":25 , 
+        "TSLA": 7, 
+        "NFLX": 22
+      },
+      "watchList" : {
+        "CSCO" : true
+      },
+
     "Rachel" : {
       "balance" : 25000,
-      "myStocks" : [ "KMB", "CRI", "BA", "DIS" ]
+      "myStocks" : {
+        "KMB": 32,
+        "CRI": 5, 
+        "BA": 8, 
+        "DIS":300 
+      }
     }
   }
+ }
 }

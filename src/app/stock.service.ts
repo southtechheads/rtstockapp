@@ -149,9 +149,9 @@ export class StockService {
   // //Profile API Calls
   // //User Profile Stock List
   // //get profile stock
-  getStockList(uid:string){
-   let getStocks = db.object(`/stock/user/${uid}/mystocks`)
-  }
+  // getStockList(uid:string){
+  //  let getStocks = db.object(`/stock/user/${uid}/mystocks`)
+  // }
     
   //   //buy stock add to stocklist
     addStock(value:number,symbol:string,shares:number,uid:string){
@@ -178,10 +178,13 @@ export class StockService {
       };
 
     //add to Watch List
-    addStockWatch(arg:number){
-      
+    addStockWatch(symbol:string,uid:string){
+      let watchList = this.db.object(`/stocks/user/${uid}/watchList`)
+      watchList.set(
+        {symbol:true}
+      )
 
-    }
+    };
     //delete from Watch List
     deleteStockWatch(arg:number) {
       
