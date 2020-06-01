@@ -1,3 +1,26 @@
-.top-spacing{
-    margin-top: 10%;
+.top-spacing {
+  margin-top: 15%;
+}
+
+
+
+@media only screen and (max-width: 600px) {
+  .top-spacing {
+    margin-top: 20%;
+  }
+
+  #purchase {
+    width: 80%;
+    margin: auto;
+  }
+
+  #watchlist {
+    width: 80%;
+    margin: auto;
+  }
+
+  #profile{
+    width: 80%;
+    margin: auto;
+  }
 }

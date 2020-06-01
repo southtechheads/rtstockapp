@@ -26,6 +26,10 @@ const routes: Routes = [
     path: 'stock/:symbol',
     component: StockpageComponent,
   },
+  {
+    path: 'stock/:symbol',
+    component: StockpageComponent,
+  },
 ];
 
 @NgModule({

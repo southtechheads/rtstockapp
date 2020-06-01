@@ -8,7 +8,7 @@
           <h5> {{ company.symbol }}</h5>
           <p style="width: 300px; margin:auto;">{{ company.description }}</p>
           <br>
-          <a href="stock"><button class="btn btn-light">V I E W</button></a>
+          <a  [routerLink]="['/stock/', company.symbol ]"><button class="btn btn-light" >V I E W</button></a>
         </div>
       </div>
     </slide>
