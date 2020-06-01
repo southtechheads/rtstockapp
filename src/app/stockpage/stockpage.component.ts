@@ -24,8 +24,9 @@ export class StockpageComponent implements OnInit {
 
   constructor(private stockService: StockService, private route: ActivatedRoute) { }
 
-  ngOnInit() {
-    
+  ngOnInit(): void {
+  //  let test = this.stockService.getProfile(input:string);
+  //  console.log('test', test);
 
     //get symbol from current route's params
     this.symbol = this.route.snapshot.params['symbol'];
@@ -49,8 +50,13 @@ export class StockpageComponent implements OnInit {
 
   }
 
+
+
+
+
   onGetShares(event:any){
     this.stockCost = this.stockPrice["c"] * this.stockShares;
   }
+
 
 }
