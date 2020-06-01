@@ -70,7 +70,7 @@ export class StockService {
     return this.http.get(`${this.stockURL}${this.newsURL}&${this.tokenURL}`)
   }
 //
-  getProfile(input:string){
+  getProfile(){
   this.http.get(`${this.stockURL}${this.companyProfileURL}${input}${this.token}`)
   .subscribe((data) => {
     console.log(data) 
@@ -85,7 +85,7 @@ export class StockService {
     return this.http.get<Quote[]>(quoteurl);
   }
 
-
+  
   //get top movers data
   getTopMovers() {
     this.topArray.map((item) => {
@@ -106,8 +106,17 @@ export class StockService {
 
 }
 
+//get profile stock 
+// getStockList(){
+// this.http.get(`${this.firebaseURL}/${user._id}`)
+// }
 
 
+//get profile watchlist 
+
+
+//add to watchlist 
+//buy stock add to stocklist 
 
 
 // functions we want
