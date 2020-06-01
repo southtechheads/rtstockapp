@@ -1,25 +1,15 @@
-<div class="justify-content-center">
-  <a [routerLink]="['/stock/', stockName]" role="button">
-    <p class="px-5 text-dark">
-      {{ stockName }}
-      <span class="h-spacing">
-        <span
-          *ngIf="negative"
-          class="material-icons"
-          style="font-size: 15px; color: red; font-weight: bolder;"
-        >
-          arrow_downward
-        </span>
-        <span
-          *ngIf="!negative"
-          class="material-icons"
-          style="font-size: 15px; color: green; font-weight: bolder;"
-        >
-          arrow_upward
-        </span>
-      </span>
-      <span class="h-spacing item">{{ stockValue | currency }}</span>
-    </p>
-  </a>
-  <hr />
+<div class="v-spacing">
+  <li class="list-group-item">
+    <span style="color:gray; font-weight: lighter;" class="px-3"> Company Name
+    </span>
+    {{ stockName }}
+    <span style="color:gray; font-weight: lighter;" class="px-3">
+      Stock Value
+    </span>
+    {{ stockValue }}
+  </li>
+  <br>
+  <div class="text-center py-2">
+    <button type="button" class="btn btn-outline-secondary text-center">REMOVE FROM WATCHLIST</button>
+  </div>
 </div>

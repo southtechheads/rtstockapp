@@ -6,6 +6,7 @@ import { LoginFormComponent } from './login-form/login-form.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { StockpageComponent } from './stockpage/stockpage.component';
+import { ProfilepageComponent } from './profilepage/profilepage.component'
 
 const routes: Routes = [
   {
@@ -27,8 +28,8 @@ const routes: Routes = [
     component: StockpageComponent,
   },
   {
-    path: 'stock/:symbol',
-    component: StockpageComponent,
+    path: 'profile',
+    component: ProfilepageComponent
   },
 ];
 
