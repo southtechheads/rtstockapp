@@ -7,24 +7,33 @@ import { HomepageComponent } from './homepage/homepage.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { StockpageComponent } from './stockpage/stockpage.component';
 
-
-const routes: Routes = [{
-  path: '', component: LoginFormComponent
-},
-{
-  path: 'signup', component: SignUpComponent
-},
-{
-  path: 'home', canActivateChild: [AuthGuardService], component: HomepageComponent
-},
-{
-  path: 'stock', component: StockpageComponent
-}
-
+const routes: Routes = [
+  {
+    path: '',
+    component: LoginFormComponent,
+    pathMatch: 'full',
+  },
+  {
+    path: 'signup',
+    component: SignUpComponent,
+  },
+  {
+    path: 'home',
+    canActivateChild: [AuthGuardService],
+    component: HomepageComponent,
+  },
+  {
+    path: 'stock/:symbol',
+    component: StockpageComponent,
+  },
+  {
+    path: 'stock/:symbol',
+    component: StockpageComponent,
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class AppRoutingModule { }

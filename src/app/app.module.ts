@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AngularFireModule } from '@angular/fire';
-import {HttpClientModule} from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -23,11 +23,12 @@ import { environment } from '../environments/environment';
 
 import { StockpageComponent } from './stockpage/stockpage.component';
 import { StockchartComponent } from './stockpage/stockchart/stockchart.component';
-import { StockupdatesComponent } from './stockpage/stockupdates/stockupdates.component';
 
-import {StockService} from './stock.service';
-import { HttpClient } from '@angular/common/http';
-
+import { StockService } from './stock.service';
+import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -43,14 +44,19 @@ import { HttpClient } from '@angular/common/http';
     SignUpComponent,
     StockpageComponent,
     StockchartComponent,
-    StockupdatesComponent,
   ],
   imports: [
     BrowserModule,
     AngularFireModule.initializeApp(environment.firebase),
     AppRoutingModule,
     CarouselModule.forRoot(),
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    MatAutocompleteModule,
+    MatInputModule,
+
   ],
   providers: [AuthService, AuthGuardService, StockService],
   bootstrap: [AppComponent],

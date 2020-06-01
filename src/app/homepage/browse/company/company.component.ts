@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-company',
@@ -7,12 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CompanyComponent implements OnInit {
 
-  //test only
-  companies: string[] = ['company 1', 'company 2', 'company 3'];
+  companies;
   
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
+    //get stock data from assets/topmovers.json
+    this.http.get("assets/topmovers.json").subscribe(data =>{
+      this.companies = data["top"];
+      
+      this.companies.map((element) => {
+        return element
+      })
+    })
   }
 
 }

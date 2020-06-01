@@ -2,13 +2,13 @@
   <carousel>
     <slide *ngFor="let company of companies">
       <div class="text-center py-5 bg-dark text-light">
-        <h2> {{ company }}</h2>
+        <h2> {{ company.companyName }}</h2>
         <br><br>
         <div class="lead">
-          <h5>slide label {{ company }}</h5>
-          <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+          <h5> {{ company.symbol }}</h5>
+          <p style="width: 300px; margin:auto;">{{ company.description }}</p>
           <br>
-          <button class="btn btn-light">V I E W</button>
+          <a  [routerLink]="['/stock/', company.symbol ]"><button class="btn btn-light" >V I E W</button></a>
         </div>
       </div>
     </slide>

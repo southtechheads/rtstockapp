@@ -27,6 +27,8 @@ export class SignUpComponent implements OnInit {
         window.alert('Sign up unsuccessful, please try again.');
       }
     }
+
+    console.log('nothing sent');
   }
 
   onLogin() {

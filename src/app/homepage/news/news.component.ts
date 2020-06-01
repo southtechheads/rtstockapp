@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { StockService } from '../../stock.service';
 
 @Component({
   selector: 'app-news',
@@ -8,26 +9,15 @@ import { Component, OnInit } from '@angular/core';
 export class NewsComponent implements OnInit {
 
   //change this with News API data
-  newslist = [ 
-    { "title" : "news 1",
-      "headline": "nec feugiat nisl pretium fusce",
-      "description": 'venenatis tellus in metus vulputate eu scelerisque felis imperdiet proin'
-    },
-    {
-      "title" : "news 2",
-      "headline": "et netus et malesuada fames",
-      "description" : "in arcu cursus euismod quis viverra nibh cras pulvinar mattis"
-    },
-    {
-      "title" : "news 3",
-      "headline": "nunc faucibus a pellentesque sit",
-      "description" : "metus dictum at tempor commodo ullamcorper a lacus vestibulum sed"
-    }
-  ]
+  newslist;
 
-  constructor() { }
+  constructor(private stockService: StockService) { }
 
-  ngOnInit(): void {
+  ngOnInit(){
+    this.stockService.getNews().subscribe((data) => {
+      console.log('news',data);
+      this.newslist = data;
+    })
   }
 
 }

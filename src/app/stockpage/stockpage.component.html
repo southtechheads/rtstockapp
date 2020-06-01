@@ -1,49 +1,126 @@
 <div class="container">
 
+  <div class="top-spacing"></div>
+
   <div class="row">
-    <div class="col-sm-2"></div>
-    <div class="col-sm-8">
-      <div class="top-spacing">
-        <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-          <h1>{{ stockName }}</h1>
-          <h4> {{ stockPrice | currency}}</h4>
-          <p> {{ stockDescription }} </p>
+    <div class="col-sm-5">
+      <!-- profile -->
+      <div class="card mb-4 shadow-sm" id="profile">
+        <div class="card-header bg-dark text-white">
+          <h4 class="my-0 font-weight-normal text-center">P R O F I L E</h4>
+        </div>
+        <div class="card-body ">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item"> <span style="color:gray; font-weight: lighter;" class="px-3"> Company Name
+              </span> {{ companyProfile.name}}</li>
+            <li class="list-group-item"> <span style="color:gray; font-weight: lighter;" class="px-3"> Company Symbol
+              </span> {{ companyProfile.ticker }}</li>
+            <li class="list-group-item"> <span style="color:gray; font-weight: lighter;" class="px-3"> Currency </span>
+              {{ companyProfile.currency }}</li>
+            <li class="list-group-item"> <span style="color:gray; font-weight: lighter;" class="px-3"> Industry </span>
+              {{ companyProfile.finnhubIndustry }}</li>
+            <li class="list-group-item"> <span style="color:gray; font-weight: lighter;" class="px-3"> Exchange </span>
+              {{ companyProfile.exchange | slice:0:10}}</li>
+            <li class="list-group-item"> <span style="color:gray; font-weight: lighter;" class="px-3"> Market Cap
+              </span> {{ companyProfile.marketCapitalization }}</li>
+          </ul>
+          <br>
+        </div>
+
+        <!-- stats -->
+        <div class="card-header bg-dark text-white">
+          <h4 class="my-0 font-weight-normal text-center">S T A T S </h4>
+        </div>
+        <div class="card-body">
+          <ul class="list-group list-group-flush mx-5">
+            <li class="list-group-item"> <span style="color:gray; font-weight: lighter;" class="px-5"> OPEN </span>
+              {{ stockPrice.o | currency }}</li>
+            <li class="list-group-item"> <span style="color:gray; font-weight: lighter;" class="px-5"> LOW </span>
+              {{ stockPrice.l | currency }}</li>
+            <li class="list-group-item"> <span style="color:gray; font-weight: lighter;" class="px-5"> HIGH </span>
+              {{ stockPrice.h | currency }}</li>
+            <li class="list-group-item"> <span style="color:gray; font-weight: lighter;" class="px-5"> CURRENT </span>
+              {{ stockPrice.c | currency }}</li>
+            <li class="list-group-item"> <span style="color:gray; font-weight: lighter;" class="px-5"> PREVIOUS </span>
+              {{ stockPrice.pc | currency }}</li>
+          </ul>
         </div>
       </div>
     </div>
-    <div class="col-sm-2"></div>
 
 
-    <div class="row">
-      <div class="col-sm-6">
-        <div class="card mb-4 shadow-sm">
-          <div class="card-header">
-            <h4 class="my-0 font-weight-normal text-center">P U R C H A S E </h4>
-          </div>
-          <div class="card-body text-center">
-            <div class="form-group row">
-              <label for="shares" class="col-sm-6 col-form-label">Number of Shares</label>
-              <input type="number" name="shares">
-            </div>
+    <!-- stock performance detail -->
+    <div class="col-sm-7">
+      <div>
+        <div class="pricing-header px-3 pb-md-4 mx-auto text-center">
+          <a class="text-dark" href="{{ companyProfile.weburl }}" target="_blank">
+            <h2><span><img src="{{ companyProfile.logo}}" style="width: 40px;"></span>
+              {{ companyProfile.name }}
+            </h2>
+          </a>
+          <h4>
+            <span class="mr-3"
+              style=" color: gray; font-size: smaller; font-family:'Roboto';">{{ stockPrice.c | currency}}</span>
+            <span class="h-spacing" [ngStyle]="negative ?{'color': 'red'} : {'color': 'green'}"
+              style=" font-size: 20px; font-family:'Roboto';">
+              (
+              <em>{{ growth | percent:'.3' }}</em>
 
-            <div class="form-group row">
-              <label for="price" class="col-sm-6 col-form-label">Market Price</label>
-              <input type="text" name="price" placeholder="{{ stockPrice | currency}}" readonly>
-            </div>
+              <span *ngIf="negative" class="material-icons" style="font-size:20px;color:red;font-weight:bolder">
+                arrow_downward
+              </span>
+              <span *ngIf="!negative" class="material-icons" style="font-size:20px;color:green;font-weight:bolder">
+                arrow_upward
+              </span>
 
-            <div class="form-group row">
-              <label for="cost" class="col-sm-6 col-form-label">Estimated Cost</label>
-              <input type="text" name="price" placeholder="{{ stockCost  | currency}}" readonly>
-            </div>
-
-            <br><br>
-            <button type="button" class="btn btn-outline-secondary text-center">B U Y</button>
-          </div>
+              )
+            </span>
+          </h4>
         </div>
       </div>
-      <div class="col-sm-6">
-        <!-- stocks chart over time -->
-        <app-stockchart></app-stockchart>
+
+      <!-- stock purchase container -->
+      <div class="card mb-4 shadow-sm" id="purchase">
+        <div class="card-header">
+          <h4 class="my-0 font-weight-normal text-center">P U R C H A S E </h4>
+        </div>
+        <div class="card-body text-center">
+          <div class="form-group row">
+            <label for="shares" class="col-sm-6 col-form-label">Number of Shares</label>
+            <input type="number" name="shares" min="1" [(ngModel)]="stockShares" value="{{stockShares}}"
+              (keyup)="onKey($event)">
+          </div>
+
+          <div class="form-group row">
+            <label for="price" class="col-sm-6 col-form-label">Market Price</label>
+            <input type="text" name="price" placeholder="{{ stockPrice.c | currency}}" readonly>
+          </div>
+
+          <div class="form-group row">
+            <label for="cost" class="col-sm-6 col-form-label">Estimated Cost</label>
+            <input type="text" name="price" placeholder="{{ stockCost  | currency}}" readonly>
+          </div>
+
+          <br><br>
+          <button type="button" class="btn btn-outline-secondary text-center">B U Y</button>
+        </div>
+      </div>
+
+      <!-- watchlist container -->
+      <div class="card mb-4 shadow-sm" id="watchlist">
+        <div class="card-header">
+          <h4 class="my-0 font-weight-normal text-center">W A T C H L I S T</h4>
+        </div>
+        <div class="card-body text-center">
+          <li class="list-group-item"> <span style="color:gray; font-weight: lighter;" class="px-3"> Company Name
+            </span> {{ companyProfile.name }}</li>
+          <br>
+          <div class="text-center">
+            <button type="button" class="btn btn-outline-secondary text-center">ADD TO WATCHLIST</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
+  <app-stockchart></app-stockchart>
+</div>
