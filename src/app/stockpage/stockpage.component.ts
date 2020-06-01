@@ -41,7 +41,6 @@ export class StockpageComponent implements OnInit {
     })
 
     this.stockService.getPrice(this.symbol).subscribe((data) => {
-      
       this.stockPrice = data;
       this.negative = this.stockPrice["pc"] > this.stockPrice["c"] ? true : false;
       this.growth = (this.stockPrice["c"] - this.stockPrice["pc"]) / this.stockPrice["c"];
@@ -51,6 +50,16 @@ export class StockpageComponent implements OnInit {
 
   onGetShares(event:any){
     this.stockCost = this.stockPrice["c"] * this.stockShares;
+  }
+
+  //uid sample for testing only
+  id = 'sdjfsjbdf'
+  onBuyStocks(value:number, symbol:string, shares:number, uid:string){
+    console.log('log...........')
+    console.log(value);
+    console.log(symbol);
+    console.log(shares);
+    console.log(uid);
   }
 
 }
