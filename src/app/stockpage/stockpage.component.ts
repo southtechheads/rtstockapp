@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { StockchartComponent } from './stockchart/stockchart.component';
 import { StockService } from '../stock.service';
-import { ActivatedRoute, Params} from '@angular/router';
+import { ActivatedRoute, Params } from '@angular/router';
+import { AuthService } from '../auth.service'
 
 @Component({
   selector: 'app-stockpage',
@@ -11,9 +12,7 @@ import { ActivatedRoute, Params} from '@angular/router';
 export class StockpageComponent implements OnInit {
 
   //stock data
-
   companyProfile;
-
   stockPrice;
   stockShares;
   stockCost;
@@ -22,11 +21,9 @@ export class StockpageComponent implements OnInit {
   growth;
 
 
-  constructor(private stockService: StockService, private route: ActivatedRoute) { }
+  constructor(private stockService: StockService, private route: ActivatedRoute, private auth: AuthService) { }
 
   ngOnInit(): void {
-  //  let test = this.stockService.getProfile(input:string);
-  //  console.log('test', test);
 
     //get symbol from current route's params
     this.symbol = this.route.snapshot.params['symbol'];
@@ -35,12 +32,13 @@ export class StockpageComponent implements OnInit {
       this.symbol = this.symbol.toUpperCase();
     })
 
-
+    //company profile display
     this.stockService.getData(this.symbol).subscribe((data) => {
       console.log(data);
       this.companyProfile = data;
     })
 
+    //stock price values
     this.stockService.getPrice(this.symbol).subscribe((data) => {
       this.stockPrice = data;
       this.negative = this.stockPrice["pc"] > this.stockPrice["c"] ? true : false;
@@ -50,21 +48,18 @@ export class StockpageComponent implements OnInit {
   }
 
 
-
-  
-
-  onGetShares(event:any){
+  onGetShares(event: any) {
     this.stockCost = this.stockPrice["c"] * this.stockShares;
   }
 
-  //uid sample for testing only
-  id = 'sdjfsjbdf'
-  onBuyStocks(value:number, symbol:string, shares:number, uid:string){
-    console.log('log...........')
-    console.log(value);
-    console.log(symbol);
-    console.log(shares);
-    console.log(uid);
+
+  onBuyStocks(value: number, symbol: string, shares: number) {
+    let uid = this.auth.isAuthenticated().uid;
+    this.stockService.addStock(value, symbol, shares, uid);
+    console.log('buy button clicked');
+    alert(`You bought ${shares} stocks from ${symbol}. Your total transaction cost is ${value}.`);
+
   }
+
 
 }

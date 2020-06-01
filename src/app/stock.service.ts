@@ -150,7 +150,7 @@ export class StockService {
   // //User Profile Stock List
   // //get profile stock
   getStockList(uid:string){
-   let getStocks = db.object(`/stock/user/${uid}/mystocks`)
+   let getStocks = this.db.object(`/stock/user/${uid}/mystocks`)
   }
     
   //   //buy stock add to stocklist
