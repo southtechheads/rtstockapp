@@ -1,0 +1,11 @@
+<div class="stocklist">
+  <p class="align-text-bottom text-center list-header bg-dark">WISHLIST</p>
+  <div>
+    <app-wishlist-item
+      *ngFor="let stock of stocks"
+      [stockName]="stock.symbol"
+      [stockValue]="stock.current"
+      [stockPrevious]="stock.previous"
+    ></app-wishlist-item>
+  </div>
+</div>
