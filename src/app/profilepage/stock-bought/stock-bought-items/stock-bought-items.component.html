@@ -1,25 +1,24 @@
-<div class="justify-content-center">
-  <a [routerLink]="['/stock/', stockName]" role="button">
-    <p class="px-5 text-dark">
+<div class="justify-content-center" >
+  <a [routerLink]="['/stock/', stockName]" role="button" class="py-2 my-3">
+    <p class="px-3 text-dark row text-center" style="margin:auto">
       {{ stockName }}
-      <span class="h-spacing">
-        <span
-          *ngIf="negative"
-          class="material-icons"
-          style="font-size: 15px; color: red; font-weight: bolder;"
-        >
+      <span class="px-3">
+        <span *ngIf="negative" class="material-icons" style="font-size: 15px; color: red; font-weight: bolder;">
           arrow_downward
         </span>
-        <span
-          *ngIf="!negative"
-          class="material-icons"
-          style="font-size: 15px; color: green; font-weight: bolder;"
-        >
+        <span *ngIf="!negative" class="material-icons" style="font-size: 15px; color: green; font-weight: bolder;">
           arrow_upward
         </span>
       </span>
-      <span class="h-spacing item">{{ stockValue | currency }}</span>
+      <span class="px-3 item">{{ stockValue | currency }}</span>
+      <!-- <span class="px-3 item"><button class="btn btn-outline-secondary text-center" style="height: 90%; margin:auto">S E L L</button></span> -->
     </p>
   </a>
+  <p class="px-5 text-dark row form-control">
+    <span class="px-2" style="color: gray; font-weight: lighter;"> Number of shares</span>
+    <span class="px-2"> {{ stockShare }} </span>
+    <span class="px-2" style="color: gray; font-weight: lighter;"> Investment </span>
+    <span class="px-2">{{ stockShare * stockValue | currency }}</span>
+  </p>
   <hr />
 </div>
