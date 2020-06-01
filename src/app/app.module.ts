@@ -29,6 +29,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatInputModule } from '@angular/material/input';
+import { SearchPipe } from './search.pipe';
+
+import { ProfilepageComponent } from './profilepage/profilepage.component';
+import { StockBoughtComponent } from './profilepage/stock-bought/stock-bought.component';
+import { StockBoughtItemsComponent } from './profilepage/stock-bought/stock-bought-items/stock-bought-items.component';
+import { WishlistComponent } from './profilepage/wishlist/wishlist.component';
+import { WishlistItemComponent } from './profilepage/wishlist/wishlist-item/wishlist-item.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +51,12 @@ import { MatInputModule } from '@angular/material/input';
     SignUpComponent,
     StockpageComponent,
     StockchartComponent,
+    SearchPipe,
+    ProfilepageComponent,
+    StockBoughtComponent,
+    StockBoughtItemsComponent,
+    WishlistComponent,
+    WishlistItemComponent
   ],
   imports: [
     BrowserModule,

@@ -49,7 +49,7 @@ export class StockpageComponent implements OnInit {
 
   }
 
-  onKey(event:any){
+  onGetShares(event:any){
     this.stockCost = this.stockPrice["c"] * this.stockShares;
   }
 

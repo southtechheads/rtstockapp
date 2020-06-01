@@ -10,5 +10,9 @@ input{
     width: 100%;
  }
  .tp-full-width {
-    width: 90%;
+    width: 80%;
+ }
+
+ .search-btn{
+    margin: auto;
  }
