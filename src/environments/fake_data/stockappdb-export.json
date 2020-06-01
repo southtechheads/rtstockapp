@@ -5,8 +5,18 @@
   "user" : {
     "Ashley" : {
       "balance" : 1000000,
-      "myStocks" : [ "RCL", "MRO", "UAA", "KR" ],
-      "watchList" : [ "NIKE", "HD", "CRM" ]
+      "myStocks" :{
+        "RCL": 5,
+        "MRO": 2,
+        "UAA":15,
+        "KR": 10
+
+      },
+      "watchList" : {
+        "NIKE": true,
+        "HD": true,
+        "CRM": true
+      }
     },
     "Brian" : {
       "balance" : 10000,
