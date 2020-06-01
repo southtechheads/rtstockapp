@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import {AngularFireDatabase} from 'angularfire2/database';
 import {
   HttpClient,
   HttpHeaders,
@@ -22,20 +23,37 @@ const httpOptions = {
   providedIn: 'root',
 })
 export class StockService {
-  constructor(private http: HttpClient) { }
+  users = [] ;
 
-  token: string = '&token=br2p5tvrh5rbm8ou56tg';
+  constructor(
+    private http: HttpClient, 
+    db: AngularFireDatabase) { 
+   db.list('/user')
+   .subscribe(users => {
+     this.users = users;
+   })
+   console.log(this.users);
+    }
+  
+
+  //Finnhubb URLS 
   stockURL: string = 'https://finnhub.io/api/v1';
   symbolURL: string = '/stock/symbol?exchange=US';
   newsURL: string = '/news?category=general';
   companyProfileURL: string = '/stock/profile2?symbol=';
   public tokenURL: string = 'token=br2p5tvrh5rbm8ou56tg';
   public quoteURL: string = '/quote?symbol=';
-  firebaseURL: string = 'https://stockappdb.firebaseio.com/';
-  symbol: string = 'MSFT';
-  userURL: string = 'https://stockappdb.firebaseio.com/stocks/user';
+  
+ // companynewsURL '/company-news?symbol=AAPL&from=2020-04-30&to=2020-05-01'
+  // earnings '/calendar/earnings?from=2010-01-01&to=2020-03-15&symbol=AAPL'
+
+ //FirebaseURLS 
+ userURL: string = 'https://stockappdb.firebaseio.com/stocks/user';
+ firebaseURL: string = 'https://stockappdb.firebaseio.com/';
   myStocksURL: string = '/myStocks'
   watchListURL: string = '/watchList'
+
+//MSC needed variables   
   profile = [];
   symbols: any;
   topArray: string[] = [
@@ -63,27 +81,22 @@ export class StockService {
     // 'CGC',
   ];
 
-
   // quotes: Quote[] = [];
   quotes = [];
 
 
-
-  // companynewsURL '/company-news?symbol=AAPL&from=2020-04-30&to=2020-05-01'
-  // earnings '/calendar/earnings?from=2010-01-01&to=2020-03-15&symbol=AAPL'
-
+ //Finnhub Stock api calls 
   //get list of symbols
   getSymbols() {
     return this.http.get(`${this.stockURL}${this.symbolURL}&${this.tokenURL}`);
   }
-
   //get news general category
   getNews(){
     return this.http.get(`${this.stockURL}${this.newsURL}&${this.tokenURL}`)
   }
-//
-  getProfile(){
-  this.http.get(`${this.stockURL}${this.companyProfileURL}${}${this.token}`)
+// get Profile information 
+  getProfile(input:string){
+  this.http.get(`${this.stockURL}${this.companyProfileURL}${input}${this.tokenURL}`)
   .subscribe((data) => {
     console.log(data) 
     this.profile.push(data);
@@ -91,13 +104,10 @@ export class StockService {
    return this.profile
   }
   //get a quote
-
-  public getQuote(quote: Quote) {
-    let quoteurl = `${this.stockURL}${this.quoteURL}${this.symbol}${this.token}`;
+  public getQuote(input:string) {
+    let quoteurl = `${this.stockURL}${this.quoteURL}${input}${this.tokenURL}`;
     return this.http.get<Quote[]>(quoteurl);
   }
-
-  
   //get top movers data
   getTopMovers() {
     this.topArray.map((item) => {
@@ -127,36 +137,36 @@ export class StockService {
     return this.http.get(`https://finnhub.io/api/v1/quote?symbol=${input}&${this.tokenURL}`)
   }
 
-//Profile API Calls 
-//User Profile Stock List 
-//get profile stock 
-getStockList():Observable<UserStock[]> {
-  return this.http.get<UserStock[]>(`${this.firebaseURL}/${UserStock._id}/myStocks`);
-  };
-  //buy stock add to stocklist 
-  addStock(stock:symbol):Observable<UserStock[]> {
-    return this.http.put<UserStock[]>(`${this.firebaseURL}/${UserStock._id}/myStocks`,stock,httpOptions)
-    };
-  //delete profile stock 
-  deleteStock(stock:symbol):Observable<UserStock[]> {
-    return this.http.delete<UserStock[]>(`${this.firebaseURL}/${UserStock._id}/myStocks`, httpOptions);
-    };
+// //Profile API Calls 
+// //User Profile Stock List 
+// //get profile stock 
+// getStockList():Observable<UserStock[]> {
+//   return this.http.get<UserStock[]>(`${this.firebaseURL}/${UserStock._id}/myStocks`);
+//   };
+//   //buy stock add to stocklist 
+//   addStock(stock:symbol):Observable<UserStock[]> {
+//     return this.http.put<UserStock[]>(`${this.firebaseURL}/${UserStock._id}/myStocks`,stock,httpOptions)
+//     };
+//   //delete profile stock 
+//   deleteStock(stock:symbol):Observable<UserStock[]> {
+//     return this.http.delete<UserStock[]>(`${this.firebaseURL}/${this.UserStock._id}/myStocks`, httpOptions);
+//     };
     
   
-  //User Profile Watch List 
-  //get profile Watch List
-  getWatchList():Observable<UserStock[]> {
-    this.http.get<UserStock[]>(`${this.firebaseURL}/${UserStock.uuid}/watchList`)
-    };
+//   //User Profile Watch List 
+//   //get profile Watch List
+//   getWatchList():Observable<UserStock[]> {
+//     return this.http.get<UserStock[]>(`${this.firebaseURL}/${UserStock.uuid}/watchList`)
+//     };
   
-  //add to Watch List 
-  addStockWatch(stock:Symbol):Observable<UserStock>{
-    return this.http.post<UserStock>(`${this.firebaseURL}/${UserStock._id}/watchList`, httpOptions)
-  }
-  //delete from Watch List
-  deleteStockWatch(stock:symbol):Observable<UserStock[]> {
-    return this.http.delete<UserStock[]>(`${this.firebaseURL}/${UserStock._id}/watchList`, stock, httpOptions);
-    }
+//   //add to Watch List 
+//   addStockWatch(stock:Symbol):Observable<UserStock>{
+//     return this.http.post<UserStock>(`${this.firebaseURL}/${UserStock._id}/watchList`, stock, httpOptions)
+//   }
+//   //delete from Watch List
+//   deleteStockWatch(stock:symbol):Observable<UserStock[]> {
+//     return this.http.delete<UserStock[]>(`${this.firebaseURL}/${UserStock._id}/watchList`, httpOptions);
+//     }
 
 }
 
