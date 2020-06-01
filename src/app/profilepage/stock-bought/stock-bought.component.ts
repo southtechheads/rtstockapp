@@ -7,23 +7,46 @@ import { StockService } from '../../stock.service';
   styleUrls: ['./stock-bought.component.css'],
 })
 export class StockBoughtComponent implements OnInit {
-  stocks;
-  constructor(private stockService: StockService) {}
+
+  //replace this with firebase user's data
+  stocksBought = [
+    {
+      symbol: "RCL",
+      share: 10
+    },
+    {
+      symbol: "MRO",
+      share: 5
+    },
+    {
+      symbol: "UAA",
+      share: 40
+    },
+    {
+      symbol: "KR",
+      share: 20
+    }];
+
+  portfolio = [];
+
+  constructor(private stockService: StockService) { }
 
   ngOnInit() {
-    this.stocks = this.stockService.getTopMovers();
-    console.log('stocks array ', this.stocks);
-    this.stocks.map((element) => {
-      console.log(element);
-      return {
-        symbol: element.symbol,
-        current: element.current,
-        previous: element.previous,
-      };
+
+    this.stocksBought.map((element) => {
+      this.stockService.getPrice(element.symbol).subscribe((data) => {
+        this.portfolio.push({
+          symbol: element.symbol,
+          current: data["c"],
+          previous: data["pc"],
+          share: element.share
+        })
+      })
+      return this.portfolio;
     });
 
-    this.stockService.getSymbols().subscribe((data) => {
-      console.log(data);
-    });
+
+
+
   }
 }

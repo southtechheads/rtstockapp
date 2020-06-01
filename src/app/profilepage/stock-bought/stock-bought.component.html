@@ -2,10 +2,12 @@
   <p class="align-text-bottom text-center list-header bg-dark">MY PORTFOLIO</p>
   <div>
     <app-stock-bought-items
-      *ngFor="let stock of stocks"
+      *ngFor="let stock of portfolio"
       [stockName]="stock.symbol"
       [stockValue]="stock.current"
       [stockPrevious]="stock.previous"
+      [stockShare]="stock.share"
     ></app-stock-bought-items>
   </div>
+
 </div>
