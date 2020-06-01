@@ -8,6 +8,15 @@ import {
 import { retry, catchError, timeout, delay } from 'rxjs/operators';
 import * as _ from 'lodash';
 import { Quote } from './models/quote';
+import { UserStock} from './models/user';
+import { Observable } from 'rxjs';
+
+const httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type': 'application/json'
+  })
+}
+
 
 @Injectable({
   providedIn: 'root',
@@ -24,6 +33,9 @@ export class StockService {
   public quoteURL: string = '/quote?symbol=';
   firebaseURL: string = 'https://stockappdb.firebaseio.com/';
   symbol: string = 'MSFT';
+  userURL: string = 'https://stockappdb.firebaseio.com/stocks/user';
+  myStocksURL: string = '/myStocks'
+  watchListURL: string = '/watchList'
   profile = [];
   symbols: any;
   topArray: string[] = [
@@ -71,7 +83,7 @@ export class StockService {
   }
 //
   getProfile(){
-  this.http.get(`${this.stockURL}${this.companyProfileURL}${input}${this.token}`)
+  this.http.get(`${this.stockURL}${this.companyProfileURL}${}${this.token}`)
   .subscribe((data) => {
     console.log(data) 
     this.profile.push(data);
@@ -115,19 +127,41 @@ export class StockService {
     return this.http.get(`https://finnhub.io/api/v1/quote?symbol=${input}&${this.tokenURL}`)
   }
 
+//Profile API Calls 
+//User Profile Stock List 
+//get profile stock 
+getStockList():Observable<UserStock[]> {
+  return this.http.get<UserStock[]>(`${this.firebaseURL}/${UserStock._id}/myStocks`);
+  };
+  //buy stock add to stocklist 
+  addStock(stock:symbol):Observable<UserStock[]> {
+    return this.http.put<UserStock[]>(`${this.firebaseURL}/${UserStock._id}/myStocks`,stock,httpOptions)
+    };
+  //delete profile stock 
+  deleteStock(stock:symbol):Observable<UserStock[]> {
+    return this.http.delete<UserStock[]>(`${this.firebaseURL}/${UserStock._id}/myStocks`, httpOptions);
+    };
+    
+  
+  //User Profile Watch List 
+  //get profile Watch List
+  getWatchList():Observable<UserStock[]> {
+    this.http.get<UserStock[]>(`${this.firebaseURL}/${UserStock.uuid}/watchList`)
+    };
+  
+  //add to Watch List 
+  addStockWatch(stock:Symbol):Observable<UserStock>{
+    return this.http.post<UserStock>(`${this.firebaseURL}/${UserStock._id}/watchList`, httpOptions)
+  }
+  //delete from Watch List
+  deleteStockWatch(stock:symbol):Observable<UserStock[]> {
+    return this.http.delete<UserStock[]>(`${this.firebaseURL}/${UserStock._id}/watchList`, stock, httpOptions);
+    }
+
 }
 
-//get profile stock 
-// getStockList(){
-// this.http.get(`${this.firebaseURL}/${user._id}`)
-// }
 
-
-//get profile watchlist 
-
-
-//add to watchlist 
-//buy stock add to stocklist 
+  
 
 
 // functions we want

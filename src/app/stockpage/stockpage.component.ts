@@ -25,7 +25,6 @@ export class StockpageComponent implements OnInit {
   constructor(private stockService: StockService, private route: ActivatedRoute) { }
 
   ngOnInit() {
-    
 
   constructor(
     private stockService: StockService
