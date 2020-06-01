@@ -1,11 +1,8 @@
-<div class="stocklist">
-  <p class="align-text-bottom text-center list-header bg-dark">WISHLIST</p>
-  <div>
-    <app-wishlist-item
-      *ngFor="let stock of stocks"
-      [stockName]="stock.symbol"
-      [stockValue]="stock.current"
-      [stockPrevious]="stock.previous"
-    ></app-wishlist-item>
+<div class="card mb-4 shadow-sm" id="watchlist">
+  <div class="card-header">
+    <h4 class="my-0 font-weight-normal text-center">W A T C H L I S T</h4>
+  </div>
+  <div class="card-body text-center">
+    <app-wishlist-item *ngFor="let stock of watchlistObj" [stockName]="stock.symbol" [stockValue]="stock.price"></app-wishlist-item>
   </div>
 </div>

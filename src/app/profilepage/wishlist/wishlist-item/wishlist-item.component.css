@@ -1,6 +1,9 @@
 .h-spacing {
   padding-left: 20%;
 }
+.v-spacing {
+  margin-bottom: 10%;
+}
 
 .item {
   color: gray;

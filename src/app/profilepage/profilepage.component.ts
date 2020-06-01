@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { StockBoughtComponent } from './stock-bought/stock-bought.component';
-import { SearchBarComponent } from './search-bar/search-bar.component';
 import { WishlistComponent } from './wishlist/wishlist.component';
 import { StockService } from '../stock.service';
 import { AuthService } from '../auth.service';
