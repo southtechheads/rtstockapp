@@ -27,7 +27,7 @@ export class StockService {
   itemsRef: AngularFireList<any>;
   items: Observable<any[]>;
 
-  constructor(private http: HttpClient, db: AngularFireDatabase) {
+  constructor(private http: HttpClient, private db: AngularFireDatabase) {
     this.itemsRef = db.list('user');
     // Use snapshotChanges().map() to store the key
     this.items = this.itemsRef
@@ -87,6 +87,11 @@ export class StockService {
 
   // quotes: Quote[] = [];
   quotes = [];
+
+  getUserProfile(uid: string) {
+    let userData: any = this.db.object(`/stocks/user/${uid}`);
+    return userData;
+  }
 
   //Finnhub Stock api calls
   //get list of symbols
