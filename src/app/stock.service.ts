@@ -26,7 +26,7 @@ export class StockService {
   users = [];
   itemsRef: AngularFireList<any>;
   items: Observable<any[]>;
-
+  user: Observable<any>;
   constructor(private http: HttpClient, private db: AngularFireDatabase) {
     this.itemsRef = db.list('user');
     // Use snapshotChanges().map() to store the key
@@ -47,6 +47,7 @@ export class StockService {
   companyProfileURL: string = '/stock/profile2?symbol=';
   public tokenURL: string = 'token=br2p5tvrh5rbm8ou56tg';
   public quoteURL: string = '/quote?symbol=';
+  slug: string;
 
   // companynewsURL '/company-news?symbol=AAPL&from=2020-04-30&to=2020-05-01'
   // earnings '/calendar/earnings?from=2010-01-01&to=2020-03-15&symbol=AAPL'
@@ -88,11 +89,29 @@ export class StockService {
   // quotes: Quote[] = [];
   quotes = [];
 
-  getUserProfile(uid: string) {
-    let userData: any = this.db.object(`/stocks/user/${uid}`);
-    return userData;
+  getUserStocks(uid: string) {
+    return new Observable((observer) => {
+      this.db
+        .object('/stocks/user/2HIvkHW0okbOw6MaYs6MpkRZVuy2/watchList')
+        .snapshotChanges()
+        .subscribe((snapshots) => {
+          console.log('snapshot: ', snapshots);
+          observer.next(snapshots.payload.val());
+        });
+    });
   }
 
+  // getUserStocks(uid: string) {
+  //   return new Promise<any>((resolve, reject) => {
+  //     this.db
+  //       .object('/stocks/user')
+  //       .snapshotChanges()
+  //       .subscribe((snapshots) => {
+  //         console.log('snapshot: ', snapshots);
+  //         resolve(snapshots);
+  //       });
+  //   });
+  // }
   //Finnhub Stock api calls
   //get list of symbols
   getSymbols() {
