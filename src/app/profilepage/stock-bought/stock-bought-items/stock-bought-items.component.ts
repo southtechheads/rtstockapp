@@ -12,6 +12,7 @@ export class StockBoughtItemsComponent implements OnInit {
   @Input() stockValue: number;
   @Input() stockPrevious: number;
   @Input() negative: boolean;
+  @Input() stockShare: number;
 
   constructor(
     private stockService: StockService,
