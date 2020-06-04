@@ -26,7 +26,6 @@ export class StockService {
   users = [];
   itemsRef: AngularFireList<any>;
   items: Observable<any[]>;
-  user: Observable<any>;
   constructor(private http: HttpClient, private db: AngularFireDatabase) {
     this.itemsRef = db.list('user');
     // Use snapshotChanges().map() to store the key
@@ -34,7 +33,9 @@ export class StockService {
       .snapshotChanges()
       .pipe(
         map((changes) =>
-          changes.map((c) => ({ key: c.payload.key, ...c.payload.val() }))
+          changes.map((c) => ({
+             key: c.payload.key, 
+             ...c.payload.val() }))
         )
       );
     console.log('get items: ', this.items);
@@ -171,32 +172,43 @@ export class StockService {
   // //Profile API Calls
   // //User Profile Stock List
   // //get profile stock
-  // getStockList():Observable<UserStock[]> {
-  //   return this.http.get<UserStock[]>(`${this.firebaseURL}/${UserStock._id}/myStocks`);
-  //   };
+  getStockList(uid:string){
+   let getStocks = this.db.object(`/stock/user/${uid}/mystocks`)
+  }
+    
   //   //buy stock add to stocklist
-  //   addStock(stock:symbol):Observable<UserStock[]> {
-  //     return this.http.put<UserStock[]>(`${this.firebaseURL}/${UserStock._id}/myStocks`,stock,httpOptions)
-  //     };
-  //   //delete profile stock
-  //   deleteStock(stock:symbol):Observable<UserStock[]> {
-  //     return this.http.delete<UserStock[]>(`${this.firebaseURL}/${this.UserStock._id}/myStocks`, httpOptions);
-  //     };
+    addStock(value:number,symbol:string,shares:number,uid:string){
+      let userStocks = this.db.object(`/stocks/user/${uid}/myStocks`)
+      userStocks.set(
+        {
+        symbol:shares
+        })
+      let userbalance:any = this.db.object(`/stocks/user/${uid}/balance`)
+      let totalvalue = (shares*value);
+      let getValue = (userbalance - totalvalue);
+      userbalance.set(getValue); 
+     };
+   
+    //delete profile stock
+    deleteStock(arg:number) {
+      
+      };
 
-  //   //User Profile Watch List
-  //   //get profile Watch List
-  //   getWatchList():Observable<UserStock[]> {
-  //     return this.http.get<UserStock[]>(`${this.firebaseURL}/${UserStock.uuid}/watchList`)
-  //     };
+    //User Profile Watch List
+    //get profile Watch List
+    getWatchList(arg:number) {
+      
+      };
 
-  //   //add to Watch List
-  //   addStockWatch(stock:Symbol):Observable<UserStock>{
-  //     return this.http.post<UserStock>(`${this.firebaseURL}/${UserStock._id}/watchList`, stock, httpOptions)
-  //   }
-  //   //delete from Watch List
-  //   deleteStockWatch(stock:symbol):Observable<UserStock[]> {
-  //     return this.http.delete<UserStock[]>(`${this.firebaseURL}/${UserStock._id}/watchList`, httpOptions);
-  //     }
+    //add to Watch List
+    addStockWatch(arg:number){
+      
+
+    }
+    //delete from Watch List
+    deleteStockWatch(arg:number) {
+      
+      }
 }
 
 // functions we want
